@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MacSentinel — 原生 macOS 系統優化與安全工具</title>
+  <meta name="description" content="MacSentinel 是免費的原生 macOS 系統健康、清理與安全檢查工具，已通過 Apple 公證，內建 14 個 MCP 工具讓本機 AI 助理直接協助你管理系統。" />
+  <meta name="keywords" content="MacSentinel, macOS, mac optimization, system cleanup, mac security, MCP, Claude Code, Cursor" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MacSentinel — 原生 macOS 系統優化與安全工具" />
+  <meta property="og:description" content="免費、Apple 公證、開源。內建 MCP 工具讓本機 AI 助理協助你的 Mac。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cenxialiu7-cloud.github.io/MacSentinel/" />
+
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+
+  <!-- 廣告：僅保留 /ads/*.html iframe 隔離橫幅；不載入任何全域追蹤或 popunder 腳本。 -->
+</head>
+<body>
+
+  <!-- ─── Header ─── -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="./" class="logo"><span class="logo-icon">🛡️</span> Mac<span>Sentinel</span></a>
+      <nav>
+        <a href="../">← 全部程式 All Apps</a>
+        <a href="#features">功能</a>
+        <a href="#mcp">MCP 整合</a>
+        <a href="#download">下載</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/cenxialiu7-cloud/MacSentinel" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ─── Hero ─── -->
+  <section class="hero">
+    <div class="container">
+      <div class="badges">
+        <span class="badge success">✓ Apple 公證</span>
+        <span class="badge">🍎 macOS 14+</span>
+        <span class="badge">🆓 完全免費</span>
+        <span class="badge">📖 開放原始碼</span>
+      </div>
+
+      <h1>
+        守護你的 Mac<br/>
+        <span class="gradient">系統健康 × 清理 × 安全</span>
+      </h1>
+
+      <p class="lead">
+        原生 macOS 工具，深入硬體層即時監控溫度、CPU、記憶體與磁碟。
+        掃描快取、瀏覽器殘留、可疑程序與網路連線。
+        內建 <strong>14 個 MCP 工具</strong>，讓 Claude Code、Cursor 等 AI 助理直接協助你管理系統。
+      </p>
+
+      <!-- Download buttons — populated dynamically from the latest GitHub Release -->
+      <div id="download" class="download-buttons">
+        <a id="dl-mac" class="btn btn-primary" href="https://github.com/cenxialiu7-cloud/MacSentinel/releases/latest" rel="noopener">
+          🍎 下載 macOS 版本
+          <span class="btn-sub" id="dl-mac-sub">Universal · Apple Silicon + Intel</span>
+        </a>
+        <a class="btn btn-secondary" href="https://github.com/cenxialiu7-cloud/MacSentinel" target="_blank" rel="noopener">
+          📂 GitHub 原始碼
+          <span class="btn-sub">查看開放原始碼</span>
+        </a>
+      </div>
+      <p class="version-note" id="version-note">正在載入最新版本…</p>
+
+      <!-- Install instructions -->
+      <div class="container install-guides">
+        <div class="install-card">
+          <h3>🍎 安裝步驟（90 秒搞定）</h3>
+          <ol>
+            <li>雙擊下載的 <code>MacSentinel-x.x.x.dmg</code> 檔案掛載。</li>
+            <li>把 <strong>MacSentinel.app</strong> 拖曳到 <strong>Applications</strong> 資料夾。</li>
+            <li>從「啟動台」或「應用程式」資料夾打開 MacSentinel。</li>
+            <li>首次啟動時 macOS <strong>不會</strong>跳出警告——因為已通過 Apple 公證。</li>
+          </ol>
+          <p class="install-tip">
+            💡 通過 Apple 公證 (Notarized) 表示 Apple 已掃描並驗證這個版本沒有惡意程式碼。
+            Gatekeeper 不會阻擋安裝。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AD ZONE #1 — Leaderboard 728×90 ═══ -->
+  <div class="ad-zone-wrap">
+    <div class="ad-label">廣告 · Advertisement</div>
+    <iframe src="../ads/lb728.html" width="728" height="90" scrolling="no" frameborder="0"
+            style="border:0;overflow:hidden;max-width:100%" title="ad" loading="lazy"></iframe>
+  </div>
+
+  <!-- ─── Features ─── -->
+  <section id="features" class="section">
+    <div class="container">
+      <h2>主要功能</h2>
+      <p class="section-lead">深入硬體與系統 API，提供原生工具該有的精確度與速度。</p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🌡️</div>
+          <h3>即時系統健康監控</h3>
+          <p>透過 SMC、IOKit 與私有 thermal API 讀取 CPU 溫度、風扇轉速、電源狀態。每秒更新，無感占用。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>程序信任驗證</h3>
+          <p>掃描所有執行中程序，用 macOS Security framework 驗證每隻 binary 的簽章來源，標示可疑或未簽章程序。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🧹</div>
+          <h3>智能快取清理</h3>
+          <p>分析瀏覽器快取、App 殘留、孤立 Container，提供可預覽的安全刪除清單。每次刪除留下審計日誌可回查。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h3>瀏覽器資料掃描</h3>
+          <p>檢視 Safari / Chrome / Firefox / Edge 的 cookies、history、cache 規模，協助你決定清哪些、留哪些。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📡</div>
+          <h3>網路連線分析</h3>
+          <p>列出所有 ESTABLISHED 連線、對應程序、目的地 IP，協助你發現可疑或不必要的外連活動。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>XProtect 狀態檢查</h3>
+          <p>檢查 macOS 內建惡意程式防護的版本與更新時間，確保 Apple 的第一道防線是最新的。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📦</div>
+          <h3>遷移殘留掃描</h3>
+          <p>從舊 Mac 遷移後，找出已不使用的舊主程式殘留檔案，動輒釋出數十 GB 空間。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3>Privileged Helper 架構</h3>
+          <p>需要 root 權限的操作交給獨立 XPC daemon，主 App 不持有特權。透過 SMAppService 註冊符合 Apple 最新規範。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>原生效能</h3>
+          <p>Swift 5.10 + SwiftUI + Swift Concurrency，Universal Binary 支援 Apple Silicon 與 Intel。冷啟動 &lt; 200ms。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MCP highlight (unique selling point) ─── -->
+  <section id="mcp" class="section section-alt">
+    <div class="container">
+      <div class="mcp-highlight">
+        <span class="badge" style="background:rgba(147,197,253,0.15);color:#93c5fd">🤖 獨家功能</span>
+        <h2>讓 AI 助理直接管理你的 Mac</h2>
+        <p class="lead">
+          MacSentinel 內建 <strong>MCP Server</strong>（Model Context Protocol），
+          14 個工具透過 stdio JSON-RPC 暴露給本機 AI 助理——
+          <strong>Claude Code、Cursor、Cline 等</strong>可以直接呼叫掃描、分析、安全刪除。
+        </p>
+        <p class="lead" style="margin-top:12px">
+          <strong>不需要 API key、不上雲、不傳資料</strong>。AI 看到的內容只有它在你電腦上看到的內容。
+        </p>
+
+        <div class="mcp-tools">
+          <div class="mcp-tool"><code>scan_caches</code> 掃描快取</div>
+          <div class="mcp-tool"><code>scan_apps</code> 應用程式清單</div>
+          <div class="mcp-tool"><code>scan_browsers</code> 瀏覽器資料</div>
+          <div class="mcp-tool"><code>scan_network</code> 網路連線</div>
+          <div class="mcp-tool"><code>scan_processes</code> 程序列表</div>
+          <div class="mcp-tool"><code>scan_process_trust</code> 簽章信任</div>
+          <div class="mcp-tool"><code>scan_xprotect</code> XProtect 狀態</div>
+          <div class="mcp-tool"><code>scan_migration</code> 遷移殘留</div>
+          <div class="mcp-tool"><code>scan_login_items</code> 開機啟動項</div>
+          <div class="mcp-tool"><code>kext_history</code> 核心擴充歷史</div>
+          <div class="mcp-tool"><code>get_system_health</code> 系統健康</div>
+          <div class="mcp-tool"><code>read_audit_log</code> 審計日誌</div>
+          <div class="mcp-tool"><code>trash_items</code> 安全刪除</div>
+          <div class="mcp-tool"><code>kill_process</code> 終止程序</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Sponsor / VPN affiliate banner ─── -->
+  <section class="section" style="padding-top:0; padding-bottom:48px;">
+    <div class="container">
+      <div class="sponsor-banner">
+        <div class="sponsor-text">
+          <span class="sponsor-badge">⚡ 推薦合作</span>
+          <h4>守護 Mac 的同時，也守護你的網路隱私</h4>
+          <p>掃描網路連線發現不必要外連？搭配 NordVPN 加密所有流量，全面提升 Mac 的安全層級。</p>
+        </div>
+        <a class="sponsor-btn" href="https://nordvpn.com/?utm_source=macsentinel&utm_medium=landing&utm_campaign=sponsor" target="_blank" rel="noopener nofollow sponsored">
+          了解 NordVPN →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AD ZONE #2 — Rectangle 300×250 ═══ -->
+  <div class="ad-zone-wrap">
+    <div class="ad-label">廣告 · Advertisement</div>
+    <iframe src="../ads/rect300.html" width="300" height="250" scrolling="no" frameborder="0"
+            style="border:0;overflow:hidden;max-width:100%" title="ad" loading="lazy"></iframe>
+  </div>
+
+  <!-- ─── FAQ ─── -->
+  <section id="faq" class="section">
+    <div class="container">
+      <h2>常見問題</h2>
+
+      <div class="faq-item">
+        <h3>MacSentinel 是免費的嗎？會把資料上傳到雲端嗎？</h3>
+        <p>完全免費、開放原始碼、所有掃描與分析都在你電腦本機進行，<strong>不會傳送任何資料到任何伺服器</strong>。</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>為什麼需要 Privileged Helper？安不安全？</h3>
+        <p>清理 <code>/Library/LaunchAgents/</code> 等系統路徑需要 root 權限。Helper 是獨立 XPC daemon、透過 Apple 官方的 SMAppService 註冊，並完整原始碼開放可審。主 App 本身不持有 root。</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Apple 公證 (Notarized) 是什麼意思？</h3>
+        <p>表示 Apple 的伺服器已掃描整個 App，確認沒有惡意程式碼與已知漏洞，並由開發者 (Shun Ching YU, Team U58M43YXTJ) 用 Developer ID 簽署。Gatekeeper 因此放行，不會跳警告。</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>MCP 工具要怎麼搭配 Claude Code / Cursor？</h3>
+        <p>安裝後，App 的設定頁有「AI 助理整合 → 顯示連線設定指引」，會教你如何在 Claude Desktop 或 Cursor 的 config 加入一段 JSON，把 <code>macsentinel-mcp</code> binary 註冊成 MCP server。完成後 AI 助理就能呼叫所有 14 個工具。</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>支援 macOS 13 (Ventura) 或更舊版本嗎？</h3>
+        <p>目前最低要求 <strong>macOS 14 Sonoma</strong>，因為使用了 SMAppService、Swift Charts、@Observable 等較新 API。短期內不打算往下回溯。</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>會自動更新嗎？</h3>
+        <p>是的。內建 Sparkle 自動更新框架，每天會檢查一次 GitHub 上的 appcast feed，發現新版本會跳出對話框讓你選擇升級。所有更新都經過 Ed25519 簽名與 Apple 公證雙重驗證。</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>遇到問題或想提建議？</h3>
+        <p>歡迎到 <a href="https://github.com/cenxialiu7-cloud/MacSentinel/issues" target="_blank" rel="noopener">GitHub Issues</a> 開 issue。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ─── -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        🛡️ <strong>MacSentinel</strong> · 原生 macOS 系統工具<br/>
+        <span class="muted">本網站非 Apple Inc. 官方產品。</span>
+      </div>
+      <div>
+        <a href="https://github.com/cenxialiu7-cloud/MacSentinel" target="_blank" rel="noopener">GitHub</a>
+        &nbsp;·&nbsp;
+        <a href="https://github.com/cenxialiu7-cloud/MacSentinel/releases" target="_blank" rel="noopener">所有版本</a>
+        &nbsp;·&nbsp;
+        <a href="../privacy.html">隱私政策</a>
+        &nbsp;·&nbsp;
+        <a href="../">回首頁</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>

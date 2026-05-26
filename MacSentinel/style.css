@@ -1,0 +1,326 @@
+/* MacSentinel landing page — bright theme matching the security tool's identity.
+   Color: trust-blue accent (shield ↔ security ↔ Apple system aesthetic) */
+
+:root {
+  --bg:           #ffffff;
+  --bg-alt:       #f8fafc;          /* slate-50 */
+  --bg-soft:      #f1f5f9;          /* slate-100 */
+  --card:         #ffffff;
+  --card-hover:   #f8fafc;
+  --border:       #e2e8f0;          /* slate-200 */
+  --border-strong:#cbd5e1;          /* slate-300 */
+  --text:         #0f172a;          /* slate-900 */
+  --text-dim:     #475569;          /* slate-600 */
+  --muted:        #94a3b8;          /* slate-400 */
+  --accent:       #2563eb;          /* blue-600 — security / trust */
+  --accent-hover: #1d4ed8;          /* blue-700 */
+  --accent-soft:  #dbeafe;          /* blue-100 */
+  --success:      #059669;          /* emerald-600 */
+  --shadow-sm:    0 1px 2px rgba(15,23,42,0.04);
+  --shadow:       0 4px 12px rgba(15,23,42,0.06);
+  --shadow-lg:    0 10px 30px rgba(15,23,42,0.10);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+               "Noto Sans TC", "PingFang TC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.accent { color: var(--accent); }
+.muted  { color: var(--muted); font-size: 0.92em; }
+a       { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); text-decoration: underline; }
+code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  background: var(--bg-soft);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: var(--accent-hover);
+}
+
+/* ─── Header ───────────────────────────────────────────────────────── */
+.site-header {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.logo {
+  font-size: 1.2rem; font-weight: 700; color: var(--text);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.logo .logo-icon { font-size: 1.5rem; }
+.logo span { color: var(--accent); }
+.site-header nav { display: flex; gap: 22px; flex-wrap: wrap; }
+.site-header nav a {
+  color: var(--text-dim); font-size: 0.92rem; font-weight: 500;
+  transition: color 0.15s;
+}
+.site-header nav a:hover { color: var(--accent); text-decoration: none; }
+
+/* ─── Hero ─────────────────────────────────────────────────────────── */
+.hero {
+  padding: 88px 0 64px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 800px 400px at 50% 0%, rgba(37,99,235,0.10), transparent 70%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+}
+.hero h1 {
+  font-size: 3rem; line-height: 1.15; margin-bottom: 18px;
+  font-weight: 800; letter-spacing: -0.02em;
+}
+.hero h1 .gradient {
+  background: linear-gradient(135deg, var(--accent) 0%, #0ea5e9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.lead {
+  font-size: 1.18rem; color: var(--text-dim);
+  max-width: 680px; margin: 0 auto 40px;
+}
+.badges {
+  display: flex; gap: 10px; justify-content: center; margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--accent-soft); color: var(--accent-hover);
+  padding: 6px 14px; border-radius: 999px;
+  font-size: 0.85rem; font-weight: 600;
+}
+.badge.success { background: #d1fae5; color: #065f46; }
+
+.download-buttons {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  justify-content: center; margin-bottom: 14px;
+}
+.btn {
+  display: inline-flex; flex-direction: column; align-items: center;
+  padding: 16px 32px; border-radius: 14px;
+  font-weight: 600; font-size: 1.05rem;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  min-width: 240px;
+}
+.btn:hover { text-decoration: none; transform: translateY(-2px); }
+.btn-primary {
+  background: var(--accent); color: #fff;
+  box-shadow: var(--shadow);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: var(--shadow-lg);
+  color: #fff;
+}
+.btn-secondary {
+  background: var(--card); color: var(--text);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+.btn-secondary:hover { background: var(--bg-soft); color: var(--text); }
+.btn-sub { font-size: 0.78rem; font-weight: 400; opacity: 0.9; margin-top: 4px; }
+.version-note { color: var(--muted); font-size: 0.88rem; margin-top: 10px; }
+
+/* ─── Install card ─────────────────────────────────────────────────── */
+.install-guides {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 720px;
+}
+.install-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+}
+.install-card h3 { font-size: 1.05rem; margin-bottom: 12px; }
+.install-card ol { padding-left: 22px; }
+.install-card li { margin-bottom: 8px; color: var(--text-dim); }
+.install-card li strong { color: var(--text); }
+.install-tip {
+  margin-top: 12px;
+  background: var(--bg-soft);
+  border-left: 3px solid var(--accent);
+  padding: 10px 14px;
+  border-radius: 6px;
+  color: var(--text-dim);
+  font-size: 0.92rem;
+}
+
+/* ─── Ad zone ──────────────────────────────────────────────────────── */
+.ad-zone-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 32px 16px; gap: 4px;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.ad-label {
+  color: var(--muted); font-size: 0.72rem;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+/* ─── Sections ─────────────────────────────────────────────────────── */
+.section { padding: 72px 0; }
+.section-alt { background: var(--bg-alt); }
+.section h2 {
+  font-size: 2.1rem; text-align: center; margin-bottom: 12px;
+  font-weight: 700; letter-spacing: -0.01em;
+}
+.section-lead {
+  text-align: center; color: var(--text-dim);
+  max-width: 600px; margin: 0 auto 48px;
+}
+
+/* ─── Feature grid ─────────────────────────────────────────────────── */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.feature-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.feature-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+.feature-icon {
+  font-size: 1.8rem; margin-bottom: 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  background: var(--accent-soft); border-radius: 12px;
+}
+.feature-card h3 {
+  font-size: 1.1rem; margin-bottom: 8px;
+  font-weight: 600;
+}
+.feature-card p {
+  color: var(--text-dim); font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ─── MCP highlight section ────────────────────────────────────────── */
+.mcp-highlight {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+  color: #f1f5f9;
+  border-radius: 24px;
+  padding: 56px 48px;
+  margin: 0 auto;
+  max-width: 920px;
+  text-align: center;
+}
+.mcp-highlight h2 {
+  color: #fff; margin-bottom: 16px;
+  background: linear-gradient(135deg, #93c5fd 0%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.mcp-highlight .lead { color: #cbd5e1; max-width: 640px; }
+.mcp-tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 32px;
+  text-align: left;
+}
+.mcp-tool {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.88rem;
+  color: #e2e8f0;
+}
+.mcp-tool code { background: rgba(255,255,255,0.08); color: #93c5fd; }
+
+/* ─── FAQ ──────────────────────────────────────────────────────────── */
+.faq-item {
+  max-width: 760px; margin: 0 auto 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 26px;
+  box-shadow: var(--shadow-sm);
+}
+.faq-item h3 {
+  font-size: 1.05rem; margin-bottom: 8px; color: var(--text);
+}
+.faq-item p { color: var(--text-dim); font-size: 0.95rem; }
+
+/* ─── Sponsor / VPN affiliate banner ───────────────────────────────── */
+.sponsor-banner {
+  max-width: 920px; margin: 0 auto;
+  background: linear-gradient(135deg, #ecfdf5 0%, #dbeafe 100%);
+  border: 1px solid #bfdbfe;
+  border-radius: 16px;
+  padding: 22px 26px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap;
+}
+.sponsor-text { flex: 1; min-width: 240px; }
+.sponsor-badge {
+  display: inline-block;
+  background: #fef3c7; color: #92400e;
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 0.75rem; font-weight: 700; margin-bottom: 8px;
+}
+.sponsor-text h4 { font-size: 1.05rem; margin-bottom: 4px; }
+.sponsor-text p { color: var(--text-dim); font-size: 0.92rem; }
+.sponsor-btn {
+  background: var(--accent); color: #fff;
+  padding: 12px 22px; border-radius: 10px;
+  font-weight: 600; white-space: nowrap;
+}
+.sponsor-btn:hover { background: var(--accent-hover); color: #fff; text-decoration: none; }
+
+/* ─── Footer ───────────────────────────────────────────────────────── */
+.site-footer {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  padding: 40px 0 32px;
+  margin-top: 64px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+.footer-inner {
+  display: flex; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+}
+.footer-inner a { color: var(--text-dim); }
+.footer-inner a:hover { color: var(--accent); }
+
+/* ─── Responsive ───────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .hero h1 { font-size: 2.2rem; }
+  .lead { font-size: 1.05rem; }
+  .section { padding: 56px 0; }
+  .section h2 { font-size: 1.7rem; }
+  .mcp-highlight { padding: 40px 24px; border-radius: 16px; }
+  .btn { min-width: 100%; }
+}
