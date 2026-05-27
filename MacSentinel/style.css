@@ -273,6 +273,33 @@ code {
 }
 .faq-item p { color: var(--text-dim); font-size: 0.95rem; }
 
+/* ─── Ko-fi donation banner ────────────────────────────────────────── */
+.kofi-banner {
+  max-width: 920px; margin: 0 auto;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border: 1px solid #fed7aa;
+  border-radius: 16px;
+  padding: 22px 26px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap;
+}
+.kofi-text { flex: 1; min-width: 240px; }
+.kofi-text h4 { font-size: 1.05rem; margin-bottom: 4px; }
+.kofi-text p { color: var(--text-dim); font-size: 0.92rem; }
+.kofi-btn {
+  background: #ff5e5b; color: #fff;
+  padding: 12px 22px; border-radius: 10px;
+  font-weight: 700; white-space: nowrap;
+  box-shadow: var(--shadow);
+  transition: background 0.15s, transform 0.15s;
+}
+.kofi-btn:hover {
+  background: #ff3a37;
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
 /* ─── Sponsor / VPN affiliate banner ───────────────────────────────── */
 .sponsor-banner {
   max-width: 920px; margin: 0 auto;
