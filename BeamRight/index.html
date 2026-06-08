@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BeamRight — Put your Mac on the big screen, with sound</title>
+<meta name="description" content="BeamRight mirrors your whole Mac — with full audio in sync — to any Chromecast or Google TV. Nothing to install on the TV. No browser. One-time price, no subscription.">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>
+  :root{
+    --ink:#0e1226; --ink2:#3a4163; --muted:#6b7290; --line:#e7e9f2;
+    --brand:#3b5bff; --brand2:#6a3bff; --accent:#ff6a4d; --ok:#15b886; --no:#e5484d;
+    --bg:#ffffff; --soft:#f6f7fc; --card:#ffffff;
+    --radius:18px; --shadow:0 18px 50px -22px rgba(28,38,90,.35); --maxw:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang TC","PingFang SC","Hiragino Sans","Noto Sans CJK","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  h1,h2,h3{line-height:1.15;letter-spacing:-.02em;margin:0}
+  .btn{display:inline-flex;align-items:center;gap:.55em;font-weight:700;border:0;cursor:pointer;
+    padding:15px 26px;border-radius:999px;font-size:16px;transition:transform .15s ease, box-shadow .15s ease}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;box-shadow:0 14px 30px -10px rgba(59,91,255,.6)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 38px -10px rgba(59,91,255,.7)}
+  .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:#c9cee2}
+  .micro{font-size:13.5px;color:var(--muted)}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(12px);background:rgba(255,255,255,.82);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:19px}
+  .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;box-shadow:0 6px 16px -6px rgba(59,91,255,.7)}
+  .mark svg{width:17px;height:17px}
+  .navlinks{display:flex;gap:22px;align-items:center}
+  .navlinks a{font-size:15px;color:var(--ink2);font-weight:500}
+  .navlinks a:hover{color:var(--ink)}
+  .langsel{font:inherit;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:7px 12px;background:#fff;color:var(--ink2);cursor:pointer}
+  @media(max-width:760px){.navlinks a:not(.btn){display:none}}
+  .hero{position:relative;overflow:hidden;padding:84px 0 70px;text-align:center;background:radial-gradient(1100px 480px at 50% -10%, #eef1ff 0%, #fff 60%)}
+  .hero h1{font-size:clamp(34px,5.6vw,60px);font-weight:850}
+  .hero .grad{background:linear-gradient(120deg,var(--brand),var(--brand2) 60%,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.sub{max-width:680px;margin:22px auto 0;font-size:clamp(17px,2.2vw,21px);color:var(--ink2)}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+  .hero .compat-line{margin-top:16px}
+  .screen{margin:54px auto 0;max-width:880px}
+  .device{border-radius:20px;border:1px solid var(--line);background:var(--soft);box-shadow:var(--shadow);padding:14px}
+  .device .bar{display:flex;gap:7px;padding:4px 6px 12px}
+  .device .bar i{width:11px;height:11px;border-radius:50%;background:#d6dae8;display:block}
+  .stage{border-radius:12px;aspect-ratio:16/9;position:relative;overflow:hidden;background:linear-gradient(135deg,#10142e,#241a4d 60%,#3b2a66);display:grid;place-items:center}
+  .beam{position:absolute;inset:0;background:radial-gradient(420px 200px at 30% 35%, rgba(106,59,255,.45), transparent 60%),radial-gradient(420px 220px at 72% 65%, rgba(59,91,255,.4), transparent 60%)}
+  .stage .play{position:relative;z-index:2;color:#fff;text-align:center;font-weight:700}
+  .stage .play .ring{width:74px;height:74px;border-radius:50%;margin:0 auto 14px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);display:grid;place-items:center}
+  .stage .play .ring svg{width:26px;height:26px;margin-left:4px}
+  section{padding:74px 0}
+  .eyebrow{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+  .sec-h{font-size:clamp(26px,3.6vw,38px);font-weight:820;margin-top:10px}
+  .sec-sub{color:var(--ink2);max-width:660px;margin:14px auto 0}
+  .center{text-align:center}
+  .compat{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .compat-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+  @media(max-width:720px){.compat-grid{grid-template-columns:1fr}}
+  .clist{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px 24px 8px}
+  .clist h3{font-size:18px;display:flex;align-items:center;gap:10px}
+  .clist ul{list-style:none;padding:0;margin:16px 0 18px}
+  .clist li{padding:9px 0;border-top:1px dashed var(--line);color:var(--ink2);font-size:15px}
+  .clist li:first-child{border-top:0}
+  .pill{font-size:12px;font-weight:800;padding:3px 9px;border-radius:999px}
+  .pill.ok{background:rgba(21,184,134,.12);color:#0f8f68}
+  .pill.no{background:rgba(229,72,77,.1);color:#c5363b}
+  .check10{margin-top:26px;background:#fff;border:1px dashed #c9cee2;border-radius:14px;padding:18px 22px;text-align:left}
+  .dongle{margin-top:18px;border-radius:14px;padding:20px 22px;color:#fff;background:linear-gradient(120deg,var(--brand),var(--brand2));box-shadow:var(--shadow);text-align:left}
+  .dongle b{font-size:18px}
+  .feat{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px;text-align:left}
+  @media(max-width:860px){.feat{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.feat{grid-template-columns:1fr}}
+  .fcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:transform .15s,border-color .15s}
+  .fcard:hover{transform:translateY(-3px);border-color:#cdd4ee}
+  .fcard .ic{font-size:26px}
+  .fcard h3{font-size:17.5px;margin:12px 0 7px}
+  .fcard p{margin:0;color:var(--ink2);font-size:14.5px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:42px;text-align:left}
+  @media(max-width:720px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px}
+  .step .n{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;font-weight:800;display:grid;place-items:center;margin-bottom:14px}
+  .step h3{font-size:17px;margin-bottom:6px}
+  .step p{margin:0;color:var(--ink2);font-size:14.5px}
+  .price-wrap{display:grid;place-items:center;margin-top:36px}
+  .price{max-width:430px;width:100%;background:#fff;border:1px solid var(--line);border-radius:24px;padding:34px;box-shadow:var(--shadow);text-align:center;position:relative}
+  .price .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-weight:800;font-size:12.5px;padding:6px 14px;border-radius:999px}
+  .price .amt{font-size:58px;font-weight:850;letter-spacing:-.03em;margin:8px 0 0}
+  .price .amt small{font-size:18px;color:var(--muted);font-weight:600}
+  .price .once{color:var(--ink2);font-weight:600}
+  .price ul{list-style:none;padding:0;margin:22px 0;text-align:left}
+  .price li{padding:8px 0;color:var(--ink2);display:flex;gap:10px;align-items:flex-start;font-size:15px}
+  .price li::before{content:"✓";color:var(--ok);font-weight:800}
+  details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:4px 20px;margin-bottom:12px}
+  details[open]{border-color:#cdd4ee}
+  summary{cursor:pointer;font-weight:700;padding:16px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--brand);font-weight:800;font-size:20px}
+  details[open] summary::after{content:"–"}
+  details p{margin:0 0 18px;color:var(--ink2)}
+  footer{background:#0e1226;color:#aeb4d0;padding:56px 0 40px;font-size:14px}
+  footer .top{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+  footer .logo{color:#fff}
+  footer .links{display:flex;gap:22px;flex-wrap:wrap}
+  footer .links a{color:#c6cbe6}
+  footer .links a:hover{color:#fff}
+  .kofi{display:inline-flex;align-items:center;gap:9px;margin-top:18px;background:#13183a;border:1px solid #2a3160;color:#fff;padding:12px 18px;border-radius:999px;font-weight:700}
+  .kofi:hover{border-color:#3b5bff}
+  .legal{margin-top:34px;padding-top:22px;border-top:1px solid #232a52;color:#7e85ab;font-size:12.5px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12c5-5 11-5 16 0M7.5 15.5c2.7-2.7 6.3-2.7 9 0M12 19h.01" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+      BeamRight
+    </div>
+    <div class="navlinks">
+      <a href="#compat" data-i18n="nav.compat">Compatibility</a>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a class="btn btn-primary" href="#download" data-i18n="nav.download">Download</a>
+      <select class="langsel" id="lang" aria-label="Language">
+        <option value="en">English</option>
+        <option value="zh-TW">繁體中文</option>
+        <option value="zh-CN">简体中文</option>
+        <option value="ja">日本語</option>
+        <option value="ko">한국어</option>
+      </select>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="download">
+  <div class="wrap">
+    <h1 data-i18n="hero.h1">Put your Mac on the<br><span class="grad">big screen — with sound.</span></h1>
+    <p class="sub" data-i18n="hero.sub">BeamRight mirrors your whole Mac to your Chromecast or Google TV in one click. Movies, slideshows, photos, presentations — all on the TV, with the audio playing right along. Nothing to install on your TV. No browser. No fuss.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#" data-i18n="hero.cta1">⬇ Download free trial</a>
+      <a class="btn btn-ghost" href="#compat" data-i18n="hero.cta2">Will it work with my TV?</a>
+    </div>
+    <p class="micro compat-line" data-i18n="hero.micro">7 days · every feature · no card required &nbsp;·&nbsp; Works with Chromecast &amp; Google TV · macOS 12+ · Apple Silicon &amp; Intel</p>
+    <div class="screen"><div class="device"><div class="bar"><i></i><i></i><i></i></div>
+      <div class="stage"><div class="beam"></div>
+        <div class="play"><div class="ring"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div><span data-i18n="hero.stage">Your Mac, mirrored — picture &amp; sound</span></div>
+      </div></div></div>
+  </div>
+</header>
+
+<section class="compat" id="compat">
+  <div class="wrap center">
+    <div class="eyebrow" data-i18n="compat.eyebrow">First things first</div>
+    <h2 class="sec-h" data-i18n="compat.title">Will it work with your TV?</h2>
+    <p class="sec-sub" data-i18n="compat.sub">BeamRight is built specifically for Chromecast and Google TV — and only those. We'd rather tell you now than have you find out after buying.</p>
+    <div class="compat-grid" style="text-align:left">
+      <div class="clist">
+        <h3 data-i18n="compat.worksTitle"><span class="pill ok">WORKS</span> Supported devices</h3>
+        <ul data-i18n="compat.works"><li>Chromecast with Google TV (HD &amp; 4K)</li><li>Chromecast Ultra</li><li>Chromecast (1st, 2nd &amp; 3rd generation)</li><li>Google TV streamers</li><li>TVs with <b>Google Cast built-in</b> (many Sony, TCL, Hisense, Philips)</li></ul>
+      </div>
+      <div class="clist">
+        <h3 data-i18n="compat.notyetTitle"><span class="pill no">NOT YET</span> Not supported on their own</h3>
+        <ul data-i18n="compat.notyet"><li>Apple TV <span class="micro">(your Mac already does this — it's AirPlay)</span></li><li>Roku</li><li>Amazon Fire TV / Fire Stick</li><li>Samsung &amp; LG smart TVs <span class="micro">(unless you add a Chromecast — see below)</span></li></ul>
+      </div>
+    </div>
+    <div class="check10" data-i18n="compat.check10"><b>Check in 10 seconds:</b> On your TV's home screen or settings, look for the <b>“Google Cast built-in”</b> / <b>“Chromecast built-in”</b> logo — or check whether your phone can already cast to it. If yes, BeamRight will work.</div>
+    <div class="dongle" data-i18n="compat.dongle"><b>No supported device? No expensive TV needed.</b><br>A Chromecast with Google TV costs about <b>$30</b>. Plug it into any TV's HDMI port and BeamRight works perfectly — the cheapest way to turn <i>any</i> television (Samsung, LG, even the old one in the garage) into a Mac-ready big screen.</div>
+    <p class="micro" style="margin-top:18px" data-i18n="compat.still">Still not sure? <b>Just try it.</b> The free trial tells you instantly whether your TV is supported — before you pay a cent.</p>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap center">
+    <div class="eyebrow" data-i18n="feat.eyebrow">Why BeamRight</div>
+    <h2 class="sec-h" data-i18n="feat.title">Built to do one job — right.</h2>
+    <div class="feat">
+      <div class="fcard"><div class="ic">🔊</div><h3 data-i18n="feat.1t">Sound that actually works</h3><p data-i18n="feat.1d">Most casting apps drop the audio or delay it. BeamRight sends your full system audio in sync — through your soundbar, receiver, or TV.</p></div>
+      <div class="fcard"><div class="ic">🖥️</div><h3 data-i18n="feat.2t">Your whole screen</h3><p data-i18n="feat.2d">Not a browser trick that mirrors one tab. BeamRight shows your entire Mac — every app, every menu, your cursor.</p></div>
+      <div class="fcard"><div class="ic">🎯</div><h3 data-i18n="feat.3t">One click. That's the setup.</h3><p data-i18n="feat.3d">Open BeamRight, pick your TV, click. No pairing codes, no accounts, nothing to install on the television.</p></div>
+      <div class="fcard"><div class="ic">🤫</div><h3 data-i18n="feat.4t">No nags, no ads</h3><p data-i18n="feat.4d">No 20-minute cut-offs. No pop-ups mid-movie. No tracking. Buy it once, it's yours, it gets out of your way.</p></div>
+      <div class="fcard"><div class="ic">🎬</div><h3 data-i18n="feat.5t">Made for movies &amp; decks</h3><p data-i18n="feat.5d">Perfect for streaming video, slideshows, presentations and big-screen photos. <span class="micro">(2–5s Wi-Fi delay — smooth for everything but fast-paced gaming.)</span></p></div>
+      <div class="fcard"><div class="ic">💛</div><h3 data-i18n="feat.6t">Indie &amp; honest</h3><p data-i18n="feat.6d">One developer, one price, real updates. We tell you up front what works — and what doesn't.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap center">
+    <div class="eyebrow" data-i18n="how.eyebrow">How it works</div>
+    <h2 class="sec-h" data-i18n="how.title">Up and running in under a minute</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3 data-i18n="how.1t">Download &amp; open</h3><p data-i18n="how.1d">Drag BeamRight to Applications and open it. Start with the free trial — buy later if it works for you.</p></div>
+      <div class="step"><div class="n">2</div><h3 data-i18n="how.2t">Pick your TV</h3><p data-i18n="how.2d">BeamRight finds every Chromecast and Google TV on your Wi-Fi automatically. Click yours.</p></div>
+      <div class="step"><div class="n">3</div><h3 data-i18n="how.3t">Click “Mirror”</h3><p data-i18n="how.3d">Your Mac appears on the TV, sound and all. Click stop whenever you're done. No codes, no browser.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap center">
+    <div class="eyebrow" data-i18n="price.eyebrow">Pricing</div>
+    <h2 class="sec-h" data-i18n="price.title">One price. Yours forever.</h2>
+    <div class="price-wrap"><div class="price">
+      <span class="tag" data-i18n="price.tag">🎉 Launch price</span>
+      <div class="once" data-i18n="price.once">one-time — no subscription, no ads</div>
+      <div class="amt"><small>$</small>14.99 <small style="text-decoration:line-through;opacity:.6">$17.99</small></div>
+      <ul data-i18n="price.li"><li>Mirror your full Mac screen</li><li>Full audio, in sync, to any output</li><li>Unlimited time — no session cut-offs</li><li>Free updates</li><li>Works with all Chromecast &amp; Google TV devices</li></ul>
+      <a class="btn btn-primary" href="#" style="width:100%;justify-content:center" data-i18n="price.cta">Start your free 7-day trial</a>
+      <p class="micro" style="margin-top:14px" data-i18n="price.micro">Test it with your own TV first. Pay only if it works. No card required to start.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--soft);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="center"><div class="eyebrow" data-i18n="faq.eyebrow">FAQ</div><h2 class="sec-h" data-i18n="faq.title">Good questions</h2></div>
+    <div style="max-width:760px;margin:34px auto 0">
+      <details open><summary data-i18n="faq.q1">Will it work on my Samsung / LG TV?</summary><p data-i18n="faq.a1">Not on its own — Samsung and LG don't use Google Cast. But plug a ~$30 Chromecast with Google TV into an HDMI port and BeamRight works perfectly. Quickest test: if your phone can already cast to your TV, so can BeamRight.</p></details>
+      <details><summary data-i18n="faq.q2">Do I need to install anything on my TV?</summary><p data-i18n="faq.a2">No. Nothing. As long as it's a Chromecast or Google TV device, you only install BeamRight on your Mac.</p></details>
+      <details><summary data-i18n="faq.q3">Does the sound come through too?</summary><p data-i18n="faq.a3">Yes — that's the whole point. BeamRight sends your full Mac audio in sync, including through soundbars and receivers, not just the TV's built-in speakers.</p></details>
+      <details><summary data-i18n="faq.q4">Is there any lag?</summary><p data-i18n="faq.a4">There's a natural 2–5 second delay over Wi-Fi. Great for movies, video, slideshows and presentations — but not built for fast-action gaming.</p></details>
+      <details><summary data-i18n="faq.q5">Is it a subscription?</summary><p data-i18n="faq.a5">No. One payment, yours forever, with free updates. Start with the 7-day free trial — every feature unlocked — and only buy if it works for you.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="logo"><span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12c5-5 11-5 16 0M7.5 15.5c2.7-2.7 6.3-2.7 9 0M12 19h.01" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></span> BeamRight</div>
+        <p style="max-width:340px;margin:14px 0 0" data-i18n="footer.tagline">Your Mac on the big screen. One click. Sound and all.</p>
+        <a class="kofi" href="https://ko-fi.com/yoyoisgood" target="_blank" rel="noopener" data-i18n="footer.kofi">☕ Enjoying BeamRight? Buy me a coffee</a>
+      </div>
+      <div class="links">
+        <a href="#download" data-i18n="footer.dl">Download</a>
+        <a href="#compat" data-i18n="footer.compat">Compatibility</a>
+        <a href="#faq" data-i18n="footer.faq">FAQ</a>
+        <a href="https://ko-fi.com/yoyoisgood" target="_blank" rel="noopener" data-i18n="footer.support">Support</a>
+      </div>
+    </div>
+    <div class="legal">
+      BeamRight works with Google Cast™. Google Cast is a trademark of Google LLC. Chromecast, Google TV, and Android TV are trademarks of Google LLC. Apple, Mac, MacBook, and AirPlay are trademarks of Apple Inc. BeamRight is an independent product and is not affiliated with, endorsed by, or sponsored by Google LLC or Apple Inc. Other trademarks are the property of their respective owners.<br><br>
+      © 2026 BeamRight. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+</body>
+</html>

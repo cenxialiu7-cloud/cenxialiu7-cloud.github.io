@@ -1,0 +1,39 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4566ff"/>
+      <stop offset="0.55" stop-color="#5a45ff"/>
+      <stop offset="1" stop-color="#7a3bff"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="292" y1="360" x2="732" y2="640" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3b5bff"/>
+      <stop offset="1" stop-color="#6a3bff"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="0.4" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#0a1040" flood-opacity="0.30"/>
+    </filter>
+  </defs>
+
+  <!-- app-icon rounded square -->
+  <rect x="0" y="0" width="1024" height="1024" rx="228" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1024" height="1024" rx="228" fill="url(#sheen)"/>
+
+  <!-- TV / screen -->
+  <g filter="url(#shadow)">
+    <rect x="232" y="300" width="560" height="392" rx="46" fill="#ffffff"/>
+  </g>
+  <!-- stand -->
+  <rect x="486" y="692" width="52" height="30" fill="#ffffff"/>
+  <rect x="420" y="722" width="184" height="20" rx="10" fill="#ffffff"/>
+
+  <!-- wireless beam radiating on the screen -->
+  <g fill="none" stroke="url(#beam)" stroke-linecap="round">
+    <path d="M362 556 Q512 386 662 556" stroke-width="34"/>
+    <path d="M420 588 Q512 470 604 588" stroke-width="34"/>
+  </g>
+  <circle cx="512" cy="612" r="30" fill="url(#beam)"/>
+</svg>
