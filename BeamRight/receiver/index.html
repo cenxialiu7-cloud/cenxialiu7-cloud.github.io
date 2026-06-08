@@ -25,9 +25,7 @@
     var statusEl = document.getElementById('status');
     function setStatus(t) { statusEl.textContent = 'WirelessCast — ' + t; }
 
-    // Surface ANY runtime error on the TV screen so failures are diagnosable
-    // without chrome://inspect (a custom receiver that throws during start()
-    // otherwise just sits silently at "啟動中…").
+    // Surface any runtime error on the TV screen (no chrome://inspect needed).
     window.addEventListener('error', function (e) {
       setStatus('JS錯誤: ' + (e.message || (e.error && e.error.message) || e.filename || 'unknown'));
     });
@@ -35,50 +33,54 @@
       var r = e.reason; setStatus('Promise錯誤: ' + ((r && r.message) || r || 'unknown'));
     });
 
+    // Add a listener ONLY if the event-type enum exists on this firmware.
+    // Some CAF builds omit certain EventType members; calling addEventListener
+    // with `undefined` throws "invalid event type" and aborts context.start().
+    function onSafe(target, type, cb) {
+      try { if (target && type) target.addEventListener(type, cb); } catch (e) {}
+    }
+
     try {
       if (!window.cast || !cast.framework) {
         setStatus('CAF SDK 未載入（gstatic 連不到？）');
       } else {
         var context = cast.framework.CastReceiverContext.getInstance();
         var playerManager = context.getPlayerManager();
+        var msgs = cast.framework.messages;
 
-        // Force incoming live fMP4 HLS to play via Shaka — the whole reason for
-        // a custom receiver (this TV's Default Receiver won't play our HLS).
-        playerManager.setMessageInterceptor(
-          cast.framework.messages.MessageType.LOAD,
-          function (loadRequest) {
-            setStatus('載入中…');
-            var media = loadRequest.media || {};
-            if (media.contentType && media.contentType.indexOf('mpegurl') >= 0) {
-              media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.FMP4;
-              media.hlsVideoSegmentFormat = cast.framework.messages.HlsVideoSegmentFormat.FMP4;
-              media.streamType = cast.framework.messages.StreamType.LIVE;
-            }
-            loadRequest.media = media;
-            return loadRequest;
+        // Force incoming live fMP4 HLS to play via Shaka (the whole reason for a
+        // custom receiver: this TV's Default Receiver won't play our HLS).
+        playerManager.setMessageInterceptor(msgs.MessageType.LOAD, function (loadRequest) {
+          setStatus('載入中…');
+          var media = loadRequest.media || {};
+          if (media.contentType && media.contentType.indexOf('mpegurl') >= 0) {
+            if (msgs.HlsSegmentFormat && msgs.HlsSegmentFormat.FMP4)
+              media.hlsSegmentFormat = msgs.HlsSegmentFormat.FMP4;
+            if (msgs.HlsVideoSegmentFormat && msgs.HlsVideoSegmentFormat.FMP4)
+              media.hlsVideoSegmentFormat = msgs.HlsVideoSegmentFormat.FMP4;
+            if (msgs.StreamType && msgs.StreamType.LIVE)
+              media.streamType = msgs.StreamType.LIVE;
           }
-        );
+          loadRequest.media = media;
+          return loadRequest;
+        });
 
-        playerManager.addEventListener(
-          cast.framework.events.EventType.PLAYER_STATE_CHANGED,
-          function (e) { setStatus('狀態 ' + e.playerState); });
-        playerManager.addEventListener(
-          cast.framework.events.EventType.ERROR,
-          function (e) { setStatus('播放錯誤 ' + (e.detailedErrorCode || e.error)); });
+        // Cosmetic on-screen status — all guarded so a missing enum can't crash.
+        var ev = cast.framework.events && cast.framework.events.EventType;
+        if (ev) {
+          onSafe(playerManager, ev.PLAYER_STATE_CHANGED, function (e) { setStatus('狀態 ' + e.playerState); });
+          onSafe(playerManager, ev.ERROR, function (e) { setStatus('播放錯誤 ' + (e.detailedErrorCode || e.error)); });
+          onSafe(playerManager, ev.MEDIA_STATUS, function (e) { if (e && e.mediaStatus) setStatus('媒體 ' + e.mediaStatus.playerState); });
+        }
+        var sysEv = cast.framework.system && cast.framework.system.EventType;
+        if (sysEv) {
+          onSafe(context, sysEv.READY, function () { setStatus('就緒，等待投放…'); });
+          onSafe(context, sysEv.ERROR, function (e) { setStatus('系統錯誤 ' + (e && (e.error || e.detailedErrorCode) || '')); });
+        }
 
         var options = new cast.framework.CastReceiverOptions();
-        // Use Shaka for HLS (the key capability the Default Receiver lacks).
-        options.useShakaForHls = true;
-        // Don't close too quickly while a live stream is starting.
+        options.useShakaForHls = true;   // the essential capability
         options.maxInactivity = 3600;
-        // NOTE: low-latency shakaPlayerConfig + customNamespaces were removed —
-        // they are optimizations and were the prime suspects for the start()
-        // failure that left the receiver stuck at "啟動中…". Re-add low-latency
-        // tuning only after playback is confirmed working.
-
-        context.addEventListener(cast.framework.system.EventType.READY, function () {
-          setStatus('就緒，等待投放…');
-        });
 
         context.start(options);
         setStatus('已呼叫 start，等待 READY…');
