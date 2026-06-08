@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WirelessCast Receiver</title>
+  <!-- Cast Application Framework (CAF) Web Receiver SDK -->
+  <script src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
+  <style>
+    html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+    cast-media-player { --background-color: #000; }
+    #status {
+      position: fixed; top: 12px; left: 12px; z-index: 10;
+      color: #6f6; font: 16px -apple-system, sans-serif; opacity: .8;
+    }
+  </style>
+</head>
+<body>
+  <!-- CAF's built-in player UI element -->
+  <cast-media-player></cast-media-player>
+  <div id="status">WirelessCast — 啟動中…</div>
+
+  <script>
+    const ns = 'urn:x-cast:com.yoyo.wirelesscast';   // 自訂訊息 namespace（可選）
+    const statusEl = document.getElementById('status');
+    function setStatus(t) { statusEl.textContent = 'WirelessCast — ' + t; }
+
+    const context = cast.framework.CastReceiverContext.getInstance();
+    const playerManager = context.getPlayerManager();
+
+    // 強制 LOAD 進來的 HLS 用 Shaka 播放（CAF 內建 MPL 對 live fMP4 HLS 相容性差，
+    // 這台 TV 的 Default Receiver 就是因此 IDLE；Shaka 較穩且支援低延遲）。
+    playerManager.setMessageInterceptor(
+      cast.framework.messages.MessageType.LOAD,
+      (loadRequest) => {
+        setStatus('載入中…');
+        const media = loadRequest.media || {};
+        // 我們送的是 application/vnd.apple.mpegurl 的 live HLS
+        if (media.contentType && media.contentType.indexOf('mpegurl') >= 0) {
+          media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.FMP4;
+          media.hlsVideoSegmentFormat = cast.framework.messages.HlsVideoSegmentFormat.FMP4;
+          media.streamType = cast.framework.messages.StreamType.LIVE;
+        }
+        loadRequest.media = media;
+        return loadRequest;
+      }
+    );
+
+    // 播放狀態 → 螢幕左上角提示（debug 用）
+    playerManager.addEventListener(
+      cast.framework.events.EventType.PLAYER_STATE_CHANGED,
+      (e) => setStatus('狀態 ' + e.playerState)
+    );
+    playerManager.addEventListener(
+      cast.framework.events.EventType.ERROR,
+      (e) => setStatus('錯誤 ' + (e.detailedErrorCode || e.error))
+    );
+
+    const options = new cast.framework.CastReceiverOptions();
+    // 用 Shaka 處理 HLS（關鍵：解決 Default Receiver 不吃 HLS 的問題）
+    options.useShakaForHls = true;
+    // Shaka 低延遲設定（搭配 sender 端 LL-HLS 才會真正降到 ~2-5 秒）
+    options.shakaPlayerConfig = {
+      streaming: {
+        lowLatencyMode: true,
+        inaccurateManifestTolerance: 0,
+        rebufferingGoal: 0.5,
+        bufferingGoal: 2,
+        bufferBehind: 4
+      }
+    };
+    // 閒置不關閉太快（live 串流啟動可能略慢）
+    options.maxInactivity = 3600;
+    options.customNamespaces = { [ns]: cast.framework.system.MessageType.JSON };
+
+    context.addEventListener(cast.framework.system.EventType.READY, () =>
+      setStatus('就緒，等待投放…'));
+
+    context.start(options);
+  </script>
+</body>
+</html>
