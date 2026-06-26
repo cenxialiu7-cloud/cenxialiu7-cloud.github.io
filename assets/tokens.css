@@ -1,0 +1,88 @@
+/* ============================================================
+   Design tokens — 生態系共用設計系統地基 (Phase 0)
+   dark-first · OKLCH 為主 · 每產品一個 accent hue
+   ============================================================ */
+
+:root {
+  /* ---- Surface ladder（冷調 zinc，靠色階堆層次，不靠陰影）---- */
+  --bg-base:     #0c0c0e;
+  --surface-1:   #161618;
+  --surface-2:   #1e1e21;
+  --surface-3:   #26262b;
+  --border:      #2b2b30;
+  --border-soft: #232327;
+
+  /* ---- Text（主文字非純白以降眩光）---- */
+  --text-primary:   #f7f7f8;
+  --text-secondary: #a0a0a8;
+  --text-muted:     #6e6e76;
+
+  /* ---- 語意色（獨立於品牌色）---- */
+  --success: #38c172;
+  --warning: #e0a83b;
+  --danger:  #e0533d;
+  --info:    #4d8de0;
+
+  /* ---- Accent：預設為 portal（鋼藍灰）。各產品頁覆寫 --accent / --accent-grad-* 即可 ---- */
+  --accent:        #8a93b8;
+  --accent-soft:   color-mix(in oklch, var(--accent) 16%, transparent);
+  --accent-text:   #aab2d4;
+  --on-accent:     #0c0c0e;
+  --accent-grad-a: #8a93b8;
+  --accent-grad-b: #6f78a0;
+
+  /* ---- 字體 ---- */
+  --font-sans:    'Inter', 'Noto Sans TC', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Inter', 'Noto Sans TC', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* ---- 字級階梯（1.25 modular scale, @16px base）---- */
+  --text-xs:  .75rem;
+  --text-sm:  .875rem;
+  --text-base: 1rem;
+  --text-lg:  1.125rem;
+  --text-xl:  1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3.5rem;
+
+  /* ---- 行高 ---- */
+  --leading-tight:  1.15;
+  --leading-snug:   1.4;
+  --leading-normal: 1.55;
+  --leading-cjk:    1.75;
+
+  /* ---- 字重 ---- */
+  --fw-body: 400;
+  --fw-medium: 500;
+  --fw-heading: 600;
+  --fw-display: 700;
+
+  /* ---- 間距（8pt 基準）---- */
+  --space-1: .25rem;  --space-2: .5rem;   --space-3: .75rem;  --space-4: 1rem;
+  --space-6: 1.5rem;  --space-8: 2rem;    --space-12: 3rem;   --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* ---- 版面 ---- */
+  --container: 1200px;
+  --gutter: 24px;
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* ---- 動態 ---- */
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+  --dur-slow: 320ms;
+}
+
+/* 各產品 accent —— 在頁面 <html> 加 class，即可整頁切換主色與漸層 */
+.theme-mediagrab   { --accent:#1fb6c9; --accent-text:#5fd3e2; --accent-grad-a:#1fb6c9; --accent-grad-b:#2d7fd6; }
+.theme-mediastudio { --accent:#e0683f; --accent-text:#f0926f; --accent-grad-a:#e0683f; --accent-grad-b:#d4407a; }
+.theme-aioss       { --accent:#10b981; --accent-text:#3fd6a0; --accent-grad-a:#10b981; --accent-grad-b:#0e9e74; }
+.theme-macsentinel { --accent:#3f9e6b; --accent-text:#5fc08a; --accent-grad-a:#3f9e6b; --accent-grad-b:#2f7e88; }
+.theme-admonitor   { --accent:#d99a2b; --accent-text:#ecbe5e; --accent-grad-a:#d99a2b; --accent-grad-b:#c4632b; }
+.theme-aipipeline  { --accent:#9b5cf0; --accent-text:#b98cf5; --accent-grad-a:#9b5cf0; --accent-grad-b:#5c8df0; }

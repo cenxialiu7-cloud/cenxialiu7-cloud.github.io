@@ -1,132 +1,183 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>免費工具集 · Free Apps</title>
-  <meta name="description" content="免費、跨平台的實用工具集合，支援 Mac 與 Windows，一鍵下載。" />
-  <meta name="keywords" content="免費工具, free apps, Mac, Windows, downloader, MediaGrab, MediaStudio, AI 影音, 聲音克隆" />
-
-  <meta property="og:title" content="免費工具集 · Free Apps" />
-  <meta property="og:description" content="免費、跨平台的實用工具集合，支援 Mac 與 Windows。" />
+  <title>趁手的工具 · cenxialiu7 工具集</title>
+  <meta name="description" content="一個人維護的免費 macOS / Windows 工具集：影音備份、AI 影音工作站、系統安全、開源情報。本機運算、無需註冊、不綁架注意力。" />
+  <meta name="keywords" content="免費工具, Mac, Windows, MediaGrab, MediaStudio, MacSentinel, 影音備份, AI 影音, 系統安全, 開源" />
+  <meta property="og:title" content="趁手的工具 · cenxialiu7 工具集" />
+  <meta property="og:description" content="免費、跨平台、本機運算的實用工具集合。不綁架、不收費、不上傳。" />
   <meta property="og:type" content="website" />
 
-  <link rel="stylesheet" href="/style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>" />
-
-  <!-- 廣告：僅保留 iframe 隔離的展示橫幅（見 body 內的 /ads/*.html）。
-       已移除 Monetag 通用標籤與 Adsterra Social Bar，因其會註冊推播
-       Service Worker、彈出 popunder/插頁並劫持點擊。 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/tokens.css" />
+  <link rel="stylesheet" href="/assets/base.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a93b8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='6' rx='2'/%3E%3Crect x='3' y='14' width='11' height='6' rx='2'/%3E%3C/svg%3E" />
 </head>
 <body>
-  <!-- ─── Ko-fi floating button (always visible) ─── -->
-  <a href="https://ko-fi.com/yoyoisgood" target="_blank" rel="noopener"
-     style="position:fixed;bottom:20px;right:20px;background:#FF5E5B;color:#fff;padding:12px 20px;border-radius:50px;text-decoration:none;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,0.25);z-index:9999;font-size:15px;font-family:system-ui,-apple-system,sans-serif;">
-    ☕ 請我喝咖啡 · Support
-  </a>
 
-  <!-- ─── Header ─── -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="/" class="logo">🧰 <span>免費工具集</span></a>
-      <nav>
-        <a href="#apps">程式 Apps</a>
-        <a href="/privacy.html">隱私 Privacy</a>
-        <a href="https://ko-fi.com/yoyoisgood" target="_blank" rel="noopener" style="background:#FF5E5B;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:600;">☕ Ko-fi</a>
+  <!-- ── Nav ── -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="brand">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="11" height="6" rx="2"/></svg>
+        <span>工具集</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#tools">工具</a>
+        <a href="/privacy.html">隱私</a>
+        <a href="https://github.com/cenxialiu7-cloud" rel="noopener">GitHub</a>
+        <a href="#tools" class="nav-cta">瀏覽工具</a>
       </nav>
     </div>
   </header>
 
-  <!-- ─── Hero ─── -->
+  <!-- ── Hero ── -->
   <section class="hero">
     <div class="container">
-      <h1>免費實用工具<br/><span class="accent">Free Cross-Platform Apps</span></h1>
-      <p class="lead">
-        免費、跨平台、零功能限制的實用工具集合。支援 macOS 與 Windows，點擊即可下載。
-        <br/>
-        <span class="muted">A growing collection of free, full-featured tools for macOS &amp; Windows.</span>
-      </p>
-      <a href="#apps" class="btn btn-primary" style="display:inline-block;">瀏覽程式 · Browse Apps ↓</a>
+      <p class="eyebrow"><span class="mono">免費 · 開源 · 跨平台</span></p>
+      <h1 class="display" style="margin-top:var(--space-4)">趁手的工具，<br>不綁架、不收費、不上傳。</h1>
+      <p class="lead">一個人維護的免費工具集。全部在你自己的 Mac 或 Windows 上運行——無需註冊、不限功能、資料不離開你的電腦。</p>
+      <div class="hero-actions">
+        <a href="#tools" class="btn btn-primary">瀏覽工具
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="https://github.com/cenxialiu7-cloud" rel="noopener" class="btn btn-ghost">原始碼在 GitHub</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>6</b><span>個工具</span></div>
+        <div><b>Mac · Win</b><span>跨平台</span></div>
+        <div><b>$0</b><span>零功能鎖</span></div>
+        <div><b>本機</b><span>不上傳資料</span></div>
+      </div>
     </div>
   </section>
 
-  <!-- ═══ AD ZONE #1 — Leaderboard banner 728x90 (iframe-isolated) ═══ -->
-  <div class="ad-zone-wrap">
-    <div class="ad-label">廣告 · Advertisement</div>
-    <iframe src="/ads/lb728.html" width="728" height="90" scrolling="no" frameborder="0"
-            style="border:0;overflow:hidden;max-width:100%" title="ad" loading="lazy"></iframe>
+  <!-- ── Trust strip ── -->
+  <div class="container">
+    <div class="trust">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 完全免費，無付費版</span>
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 無需註冊登入</span>
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 本機運算，不上傳</span>
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 原始碼公開</span>
+    </div>
   </div>
 
-  <!-- ─── App grid ─── -->
-  <section id="apps" class="section">
+  <!-- ── Tools (bento) ── -->
+  <section id="tools" class="section">
     <div class="container">
-      <h2>程式列表 · Apps</h2>
-      <div class="feature-grid">
+      <div class="section-head reveal">
+        <p class="eyebrow"><span class="mono">工具 · TOOLS</span></p>
+        <h2>六個工具，各司其職</h2>
+        <p>下載備份、AI 影音、系統安全、開源情報——挑你需要的帶走。</p>
+      </div>
+
+      <div class="bento">
 
         <!-- MediaGrab -->
-        <a href="/MediaGrab/" class="app-card">
-          <div class="app-icon">📥</div>
-          <h3>MediaGrab</h3>
-          <p class="app-tagline">個人影音備份工具</p>
-          <p>下載 YouTube、FB、IG、抖音、Twitch、Gimy 等網站的影片與直播。智能網址辨識、批次下載、直播錄製。</p>
-          <div class="app-platforms">
-            <span class="badge">🍎 macOS</span>
-            <span class="badge">🪟 Windows</span>
+        <a href="/MediaGrab/" class="tile col-2 reveal" style="--accent:#1fb6c9;--accent-text:#5fd3e2;--accent-grad-a:#1fb6c9;--accent-grad-b:#2d7fd6">
+          <div class="tile-head">
+            <svg class="tile-logo tile-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v10m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+            <h3>MediaGrab</h3>
           </div>
-          <span class="app-cta">前往下載 →</span>
+          <p class="tagline">個人影音備份工具</p>
+          <p>貼上網址即下載 YouTube、FB、IG、抖音、Twitch 等影片與直播。智能辨識、批次解析、直播錄製。</p>
+          <div class="shot">產品截圖待補</div>
+          <div class="tile-foot"><span class="go">前往下載 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="tag">macOS · Windows</span></div>
         </a>
 
         <!-- MediaStudio -->
-        <a href="/mediastudio/" class="app-card">
-          <div class="app-icon">🎬</div>
-          <h3>MediaStudio</h3>
-          <p class="app-tagline">AI 影音工作站</p>
-          <p>離線 AI 影音處理：語音轉文字、字幕、文字驅動剪輯、口誤聲音替換、GPT-SoVITS 聲音克隆訓練。全在本機運行。</p>
-          <div class="app-platforms">
-            <span class="badge">🍎 macOS</span>
-            <span class="badge">🪟 Windows</span>
+        <a href="/mediastudio/" class="tile col-2 reveal" style="--accent:#e0683f;--accent-text:#f0926f;--accent-grad-a:#e0683f;--accent-grad-b:#d4407a">
+          <div class="tile-head">
+            <svg class="tile-logo tile-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h2l2-5 3 12 3-16 3 13 2-4h3"/></svg>
+            <h3>MediaStudio</h3>
           </div>
-          <span class="app-cta">前往下載 →</span>
+          <p class="tagline">離線 AI 影音工作站</p>
+          <p>語音轉文字、字幕、文字驅動剪輯、口誤聲音替換、GPT-SoVITS 聲音克隆訓練。全在本機運行。</p>
+          <div class="shot">產品截圖待補</div>
+          <div class="tile-foot"><span class="go">前往下載 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="tag">macOS · Windows</span></div>
         </a>
 
-        <!-- Placeholder for future apps -->
-        <div class="app-card app-card-soon">
-          <div class="app-icon">✨</div>
-          <h3>更多程式</h3>
-          <p class="app-tagline">More apps coming</p>
-          <p>更多免費工具開發中，敬請期待。More free tools are in development.</p>
+        <!-- MacSentinel -->
+        <a href="/MacSentinel/" class="tile reveal" style="--accent:#3f9e6b;--accent-text:#5fc08a">
+          <div class="tile-head">
+            <svg class="tile-logo tile-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg>
+            <h3>MacSentinel</h3>
+          </div>
+          <p class="tagline">macOS 系統優化與安全</p>
+          <p>系統健康檢查、清理與安全掃描，內建 MCP，可在 Claude 裡直接呼叫。</p>
+          <div class="tile-foot"><span class="go">查看 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="tag">macOS</span></div>
+        </a>
+
+        <!-- ai-oss-daily -->
+        <a href="/ai-oss-daily/" class="tile reveal" style="--accent:#10b981;--accent-text:#3fd6a0">
+          <div class="tile-head">
+            <svg class="tile-logo tile-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="1.4"/><path d="M10 6h10M10 12h10M10 18h10"/><circle cx="5" cy="12" r="1.4"/><circle cx="5" cy="18" r="1.4"/></svg>
+            <h3>AI 開源日報</h3>
+          </div>
+          <p class="tagline">每日 AI/LLM 開源情報</p>
+          <p>精選每日 AI 開源專案，雙語摘要與授權判讀，幫你快速掌握能用什麼。</p>
+          <div class="tile-foot"><span class="go">閱讀 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="tag">網頁</span></div>
+        </a>
+
+        <!-- local-ai-studio -->
+        <a href="https://github.com/cenxialiu7-cloud/local-ai-studio" rel="noopener" class="tile col-2 reveal" style="--accent:#9b5cf0;--accent-text:#b98cf5;--accent-grad-a:#9b5cf0;--accent-grad-b:#5c8df0">
+          <div class="tile-head">
+            <svg class="tile-logo tile-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.5 7.5 11 16m6-8.5L13 16"/></svg>
+            <h3>local-ai-studio</h3>
+          </div>
+          <p class="tagline">本機 AI 生圖／生影片工作站</p>
+          <p>ComfyUI + MCP 的本機生成管線，可由 Claude Code 自動驅動。開源、可自架。</p>
+          <div class="tile-foot"><span class="go">看原始碼 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span><span class="tag">GitHub · 開源</span></div>
+        </a>
+
+        <!-- BeamRight (付費) -->
+        <a href="https://beamright.pages.dev/" rel="noopener" class="tile col-2 reveal" style="--accent:#e0a83b;--accent-text:#ecc46e;--accent-grad-a:#e0a83b;--accent-grad-b:#c4632b">
+          <div class="tile-head">
+            <svg class="tile-logo tile-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M3 9a5 5 0 0 1 5 5"/><circle cx="4" cy="13" r="0.6"/></svg>
+            <h3>BeamRight</h3>
+          </div>
+          <p class="tagline">Mac 螢幕＋聲音鏡射到電視</p>
+          <p>把整個 Mac 畫面與同步聲音投到任何 Chromecast / Google TV。電視端零安裝、免瀏覽器。</p>
+          <div class="tile-foot"><span class="go">前往官網 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span><span class="tag tag-paid">付費 · 一次買斷</span></div>
+        </a>
+
+        <!-- 開源彙整 -->
+        <div class="tile col-2 reveal" style="--accent:#8a93b8;--accent-text:#aab2d4">
+          <div class="tile-head">
+            <svg class="tile-logo tile-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.8a3.3 3.3 0 0 0-.9-2.5c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 20 5.8 4.8 4.8 0 0 0 19.9 2S18.7 1.6 16 3.5a13.4 13.4 0 0 0-7 0C6.3 1.6 5.1 2 5.1 2A4.8 4.8 0 0 0 5 5.8 5.2 5.2 0 0 0 3.7 9.4c0 5.2 3.2 6.4 6.2 6.7a3.3 3.3 0 0 0-.9 2.5V22"/></svg>
+            <h3>全部開源</h3>
+          </div>
+          <p class="tagline">程式碼公開、歡迎檢視</p>
+          <p>每個工具的原始碼都公開在 GitHub，沒有黑箱、沒有後門。歡迎回報問題或貢獻。</p>
+          <div class="tile-foot"><a class="go" href="https://github.com/cenxialiu7-cloud" rel="noopener">前往 GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ═══ AD ZONE #2 — Native banner + Rectangle 300x250 (iframe-isolated) ═══ -->
-  <div class="ad-zone-wrap">
-    <div class="ad-label">廣告 · Advertisement</div>
-    <iframe src="/ads/native.html" width="100%" height="280" scrolling="no" frameborder="0"
-            style="border:0;overflow:hidden;max-width:728px" title="ad" loading="lazy"></iframe>
-    <div style="margin-top:16px;">
-      <iframe src="/ads/rect300.html" width="300" height="250" scrolling="no" frameborder="0"
-              style="border:0;overflow:hidden;max-width:100%" title="ad" loading="lazy"></iframe>
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="/" class="brand" style="font-size:var(--text-base)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="11" height="6" rx="2"/></svg>
+          <span>工具集</span>
+        </a>
+        <p class="disclaimer">所有工具皆為免費。使用者需自行遵守各來源網站服務條款與適用著作權法。</p>
+      </div>
+      <div style="display:flex;gap:var(--space-8)">
+        <a href="/privacy.html">隱私政策</a>
+        <a href="https://github.com/cenxialiu7-cloud" rel="noopener">GitHub</a>
+        <a href="#tools">工具</a>
+      </div>
     </div>
-  </div>
-
-  <!-- ─── Footer ─── -->
-  <footer class="site-footer">
-    <div class="container">
-      <p class="disclaimer">
-        本站提供的工具皆為免費。使用者需自行遵守各來源網站服務條款與適用著作權法。
-        <br/>
-        All tools here are free. Users are responsible for complying with source-site terms of service and applicable copyright law.
-      </p>
-      <p class="footer-links">
-        <a href="/privacy.html">隱私政策 Privacy</a> ·
-        <a href="https://github.com/cenxialiu7-cloud" rel="noopener">GitHub</a> ·
-        <a href="https://ko-fi.com/yoyoisgood" target="_blank" rel="noopener">☕ Support on Ko-fi</a>
-      </p>
-      <p class="copyright">© 2026 · Free &amp; open.</p>
-    </div>
+    <div class="container" style="margin-top:var(--space-8)"><p class="muted" style="font-size:var(--text-sm)">© 2026 · Free &amp; open.</p></div>
   </footer>
+
 </body>
 </html>
