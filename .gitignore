@@ -1,0 +1,5 @@
+
+# 安全硬化
+.env
+.env.*
+!.env.example
