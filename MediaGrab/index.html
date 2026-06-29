@@ -1,233 +1,233 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant" class="theme-mediagrab">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MediaGrab — 個人影音備份工具 · Personal Video Backup Tool</title>
-  <meta name="description" content="MediaGrab 是免費的跨平台影音備份工具，支援 Mac 與 Windows。一鍵儲存你自己的影片、Creative Commons 與公開內容。" />
-  <meta name="keywords" content="影音備份, video backup, MediaGrab, Mac, Windows, downloader" />
-
-  <!-- Open Graph for social sharing -->
+  <title>MediaGrab — 個人影音備份工具</title>
+  <meta name="description" content="MediaGrab 是免費的跨平台影音備份工具，支援 Mac 與 Windows。一鍵儲存你自己的影片、Creative Commons 與公開內容到本機。" />
+  <meta name="keywords" content="影音備份, video backup, MediaGrab, Mac, Windows, downloader, yt-dlp" />
   <meta property="og:title" content="MediaGrab — 個人影音備份工具" />
-  <meta property="og:description" content="免費跨平台影音備份工具，支援 Mac 與 Windows。" />
+  <meta property="og:description" content="免費跨平台影音備份工具，支援 Mac 與 Windows。本機運行、不上傳。" />
   <meta property="og:type" content="website" />
 
-  <link rel="stylesheet" href="/style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📥</text></svg>" />
-
-  <!-- 廣告：僅保留 iframe 隔離的展示橫幅（見 body 內的 /ads/*.html）。
-       已移除 Monetag 通用標籤與 Adsterra Social Bar，因其會註冊推播
-       Service Worker、彈出 popunder/插頁並劫持點擊。 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/tokens.css" />
+  <link rel="stylesheet" href="/assets/base.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231fb6c9' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v10m0 0 4-4m-4 4-4-4'/%3E%3Cpath d='M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2'/%3E%3C/svg%3E" />
 </head>
 <body>
-  <!-- ─── Ko-fi floating button (always visible) ─── -->
-  <a href="https://ko-fi.com/yoyoisgood" target="_blank" rel="noopener"
-     style="position:fixed;bottom:20px;right:20px;background:#FF5E5B;color:#fff;padding:12px 20px;border-radius:50px;text-decoration:none;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,0.25);z-index:9999;font-size:15px;font-family:system-ui,-apple-system,sans-serif;">
-    ☕ 請我喝咖啡 · Support
+
+  <!-- Ko-fi 浮動鈕 -->
+  <a href="https://ko-fi.com/yoyoisgood" target="_blank" rel="noopener" class="kofi-float">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4Z"/><path d="M6 2v2M10 2v2M14 2v2"/></svg>
+    請我喝咖啡
   </a>
 
-    <!-- ─── Header ─── -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="/" class="logo">📥 <span>MediaGrab</span></a>
-      <nav>
-        <a href="/">← 全部程式 All Apps</a>
-        <a href="#features">功能 Features</a>
-        <a href="#download">下載 Download</a>
-        <a href="#faq">常見問題 FAQ</a>
-        <a href="/privacy.html">隱私 Privacy</a>
-        <a href="https://ko-fi.com/yoyoisgood" target="_blank" rel="noopener" style="background:#FF5E5B;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-weight:600;">☕ Ko-fi</a>
+  <!-- Nav -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="brand">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v10m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        <span>MediaGrab</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/">← 全部工具</a>
+        <a href="#features">功能</a>
+        <a href="#faq">常見問題</a>
+        <a href="/privacy.html">隱私</a>
+        <a href="#download" class="nav-cta">下載</a>
       </nav>
     </div>
   </header>
 
-  <!-- ─── Hero ─── -->
-  <section class="hero">
+  <!-- Hero -->
+  <section class="hero" id="download">
     <div class="container">
-      <h1>個人影音備份工具<br/><span class="accent">Personal Video Backup Tool</span></h1>
-      <p class="lead">
-        免費、跨平台、零廣告干擾。一鍵儲存你自己的影片、Creative Commons 與公開內容到本機。
-        <br/>
-        <span class="muted">Free, cross-platform. Save your own videos, Creative Commons &amp; public content to your computer.</span>
-      </p>
+      <p class="eyebrow"><span class="mono">免費 · 跨平台 · 本機運行</span></p>
+      <h1 class="display" style="margin-top:var(--space-4)">把影片，<br>留在你自己的電腦裡。</h1>
+      <p class="lead">貼上網址即下載 YouTube、FB、IG、抖音、Twitch 等影片與直播。智能辨識、批次解析、直播錄製——全在本機，不上傳。</p>
 
-      <!-- Download buttons — populated dynamically from the latest GitHub Release -->
-      <div id="download" class="download-buttons">
-        <a id="dl-mac-arm" class="btn btn-primary" href="#" rel="noopener">
-          🍎 macOS (Apple Silicon)
-          <span class="btn-sub" id="dl-mac-arm-sub">M1 / M2 / M3 / M4</span>
+      <div class="dl-row">
+        <a id="dl-mac-arm" class="dl" href="#" rel="noopener">
+          <span class="dl-os"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2 1.6-3 1.7-3.05-.93-1.36-2.38-1.55-2.9-1.57-1.23-.12-2.4.72-3.02.72-.63 0-1.59-.7-2.61-.68-1.34.02-2.58.78-3.27 1.98-1.4 2.42-.36 6 1 7.97.67.96 1.46 2.04 2.5 2 1-.04 1.39-.65 2.6-.65 1.21 0 1.56.65 2.62.63 1.08-.02 1.77-.98 2.43-1.95.77-1.12 1.08-2.2 1.1-2.26-.02-.01-2.1-.81-2.12-3.2zM14.6 6.6c.55-.67.93-1.6.82-2.53-.8.03-1.77.53-2.34 1.2-.51.58-.96 1.53-.84 2.43.9.07 1.8-.45 2.36-1.1z"/></svg> macOS (Apple Silicon)</span>
+          <span class="dl-sub" id="dl-mac-arm-sub">M1 / M2 / M3 / M4</span>
         </a>
-        <a id="dl-mac-intel" class="btn btn-secondary" href="#" rel="noopener">
-          🍎 macOS (Intel)
-          <span class="btn-sub">Intel Mac</span>
+        <a id="dl-mac-intel" class="dl" href="#" rel="noopener">
+          <span class="dl-os"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2 1.6-3 1.7-3.05-.93-1.36-2.38-1.55-2.9-1.57-1.23-.12-2.4.72-3.02.72-.63 0-1.59-.7-2.61-.68-1.34.02-2.58.78-3.27 1.98-1.4 2.42-.36 6 1 7.97.67.96 1.46 2.04 2.5 2 1-.04 1.39-.65 2.6-.65 1.21 0 1.56.65 2.62.63 1.08-.02 1.77-.98 2.43-1.95.77-1.12 1.08-2.2 1.1-2.26-.02-.01-2.1-.81-2.12-3.2zM14.6 6.6c.55-.67.93-1.6.82-2.53-.8.03-1.77.53-2.34 1.2-.51.58-.96 1.53-.84 2.43.9.07 1.8-.45 2.36-1.1z"/></svg> macOS (Intel)</span>
+          <span class="dl-sub">Intel Mac</span>
         </a>
-        <a id="dl-win" class="btn btn-primary" href="#" rel="noopener">
-          🪟 Windows
-          <span class="btn-sub" id="dl-win-sub">Windows 10 / 11 (x64)</span>
+        <a id="dl-win" class="dl" href="#" rel="noopener">
+          <span class="dl-os"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5 10 4.5v7H3zM11 4.3 21 3v8.5H11zM3 12.5h7v7L3 18.5zM11 12.5h10V21l-10-1.3z"/></svg> Windows</span>
+          <span class="dl-sub" id="dl-win-sub">Windows 10 / 11 (x64)</span>
         </a>
       </div>
-      <p class="version-note" id="version-note">正在載入最新版本… · Loading latest version…</p>
-    </div>
+      <p class="version-note" id="version-note">正在載入最新版本…</p>
 
-    <!-- ─── Install instructions (right under the buttons) ─── -->
-    <div class="container install-guides">
-      <!-- macOS -->
-      <div class="install-card">
-        <h3>🍎 macOS 安裝步驟</h3>
-        <ol>
-          <li>雙擊下載好的 <code>.pkg</code> 檔案。</li>
-          <li>若跳出「<strong>無法打開，因為來自未識別的開發者</strong>」或「<strong>已遭封鎖以保護你的 Mac</strong>」，按「<strong>好</strong>」關閉。</li>
-          <li>打開「<strong>系統設定</strong>」→「<strong>隱私權與安全性</strong>」。</li>
-          <li>捲到最下方「安全性」區，會看到被封鎖的 MediaGrab 訊息 → 點「<strong>強制打開</strong>」。</li>
-          <li>再次確認 →「<strong>打開</strong>」→ 輸入開機密碼，安裝精靈就會開始。</li>
-        </ol>
-        <p class="install-tip">💡 看到「damaged 已損毀」訊息時，這是 macOS 的隔離標記，照上述步驟即可，並非真的損毀。</p>
-      </div>
-      <!-- Windows -->
-      <div class="install-card">
-        <h3>🪟 Windows 安裝步驟</h3>
-        <ol>
-          <li>雙擊下載好的 <code>.exe</code> 安裝程式。</li>
-          <li>若出現藍色「<strong>Windows 已保護您的電腦</strong>」畫面，點左下小字「<strong>其他資訊 More info</strong>」。</li>
-          <li>展開後點「<strong>仍要執行 Run anyway</strong>」。</li>
-          <li>跟著安裝精靈完成 → 桌面 / 開始功能表會出現 MediaGrab 圖示。</li>
-        </ol>
-        <p class="install-tip">💡 警告是因為程式未付費簽章，並非病毒。所有原始碼公開於 GitHub。</p>
+      <div class="guides">
+        <div class="guide">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6z"/></svg> macOS 安裝步驟</h3>
+          <ol>
+            <li>雙擊下載好的 <code>.pkg</code> 檔案。</li>
+            <li>若跳出「<strong>無法打開，因為來自未識別的開發者</strong>」，按「<strong>好</strong>」關閉。</li>
+            <li>打開「<strong>系統設定</strong>」→「<strong>隱私權與安全性</strong>」。</li>
+            <li>捲到最下方「安全性」區 → 點 MediaGrab 旁的「<strong>強制打開</strong>」。</li>
+            <li>再次確認「<strong>打開</strong>」→ 輸入開機密碼，安裝精靈就會開始。</li>
+          </ol>
+          <p class="tip">看到「damaged 已損毀」是 macOS 的隔離標記，照上述步驟即可，並非真的損毀。</p>
+        </div>
+        <div class="guide">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg> Windows 安裝步驟</h3>
+          <ol>
+            <li>雙擊下載好的 <code>.exe</code> 安裝程式。</li>
+            <li>若出現藍色「<strong>Windows 已保護您的電腦</strong>」，點左下「<strong>其他資訊</strong>」。</li>
+            <li>展開後點「<strong>仍要執行</strong>」。</li>
+            <li>跟著安裝精靈完成 → 桌面／開始功能表會出現 MediaGrab。</li>
+          </ol>
+          <p class="tip">警告是因為程式未付費簽章，並非病毒。所有原始碼公開於 GitHub。</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ AD ZONE #1 — Leaderboard banner 728x90 (iframe-isolated) ═══ -->
-  <div class="ad-zone-wrap">
-    <div class="ad-label">廣告 · Advertisement</div>
-    <iframe src="/ads/lb728.html" width="728" height="90" scrolling="no" frameborder="0"
-            style="border:0;overflow:hidden;max-width:100%" title="ad" loading="lazy"></iframe>
-  </div>
-
-  <!-- ─── Features ─── -->
+  <!-- Features -->
   <section id="features" class="section">
     <div class="container">
-      <h2>主要功能 · Features</h2>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon">✨</div>
+      <div class="section-head reveal">
+        <p class="eyebrow"><span class="mono">功能 · FEATURES</span></p>
+        <h2>需要的都有，沒有的不囉嗦</h2>
+      </div>
+      <div class="features">
+        <div class="feature reveal">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 4.6L19 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15v4M21 17h-4"/></svg>
           <h3>智能網址辨識</h3>
-          <p>貼上任何網址，自動判斷該下載影片、批次解析清單，還是錄製直播。Smart URL detection routes every link automatically.</p>
+          <p>貼上任何網址，自動判斷該下載影片、批次解析清單，還是錄製直播。</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">📃</div>
+        <div class="feature reveal">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg>
           <h3>批次下載清單</h3>
-          <p>支援 YouTube 播放清單與頻道，一次勾選多支影片批次下載。Batch-download YouTube playlists &amp; channels.</p>
+          <p>支援 YouTube 播放清單與頻道，一次勾選多支影片批次下載。</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔴</div>
+        <div class="feature reveal">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
           <h3>直播錄製</h3>
-          <p>錄製 Twitch、YouTube Live 等直播，crash-safe 格式確保檔案完整。Record live streams safely.</p>
+          <p>錄製 Twitch、YouTube Live 等直播，crash-safe 格式確保檔案完整。</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🎬</div>
+        <div class="feature reveal">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5M16 4v5M8 20v-5M16 20v-5"/></svg>
           <h3>多畫質選擇</h3>
-          <p>從 144p 到 4K，自由選擇下載畫質與格式。Choose any quality from 144p to 4K.</p>
+          <p>從 144p 到 4K，自由選擇下載畫質與格式。</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🆓</div>
+        <div class="feature reveal">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V7a2 2 0 0 1 2-2h7l9 9-7 7z"/><circle cx="8" cy="9" r="1.3"/></svg>
           <h3>完全免費</h3>
-          <p>所有功能免費，無付費鎖、無功能限制。100% free — every feature unlocked, forever.</p>
+          <p>所有功能免費，無付費鎖、無功能限制。永遠如此。</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔒</div>
+        <div class="feature reveal">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
           <h3>本機運行</h3>
-          <p>程式在你自己的電腦運行，不上傳任何資料。Runs locally — no data leaves your computer.</p>
+          <p>程式在你自己的電腦運行，不上傳任何資料。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ AD ZONE #2 — Native banner + Rectangle 300x250 (iframe-isolated) ═══ -->
-  <div class="ad-zone-wrap">
-    <div class="ad-label">廣告 · Advertisement</div>
-    <iframe src="/ads/native.html" width="100%" height="280" scrolling="no" frameborder="0"
-            style="border:0;overflow:hidden;max-width:728px" title="ad" loading="lazy"></iframe>
-    <div style="margin-top:16px;">
-      <iframe src="/ads/rect300.html" width="300" height="250" scrolling="no" frameborder="0"
-              style="border:0;overflow:hidden;max-width:100%" title="ad" loading="lazy"></iframe>
+  <!-- 合併廣告位 #1 -->
+  <div class="container">
+    <div class="ad-slot">
+      <span class="ad-label">廣告 · Advertisement</span>
+      <iframe src="/ads/lb728.html" width="728" height="90" scrolling="no" loading="lazy" title="advertisement"></iframe>
     </div>
   </div>
 
-  <!-- ─── How to use ─── -->
+  <!-- How to use -->
   <section class="section section-alt">
     <div class="container">
-      <h2>如何使用 · How to Use</h2>
-      <ol class="steps">
+      <div class="section-head reveal">
+        <p class="eyebrow"><span class="mono">如何使用 · HOW TO</span></p>
+        <h2>四步開始</h2>
+      </div>
+      <ol class="steps reveal">
         <li><strong>下載安裝</strong>：點上方按鈕下載適合你系統的版本並安裝。</li>
         <li><strong>啟動程式</strong>：開啟 MediaGrab，瀏覽器會自動打開操作介面。</li>
-        <li><strong>貼上網址</strong>：在「智能 Smart」分頁貼上影音網址，按「解析」。</li>
-        <li><strong>開始下載</strong>：選擇畫質或集數，下載的檔案會存到「下載」資料夾。</li>
+        <li><strong>貼上網址</strong>：在「智能」分頁貼上影音網址，按「解析」。</li>
+        <li><strong>開始下載</strong>：選擇畫質或集數，檔案會存到「下載」資料夾。</li>
       </ol>
     </div>
   </section>
 
-  <!-- ═══ AD ZONE #3 — 468x60 banner (between How-to-use and FAQ) ═══ -->
-  <div class="ad-zone-wrap">
-    <div class="ad-label">廣告 · Advertisement</div>
-    <iframe src="/ads/banner468.html" width="468" height="60" scrolling="no" frameborder="0"
-            style="border:0;overflow:hidden;max-width:100%" title="ad" loading="lazy"></iframe>
-  </div>
-
-  <!-- ─── FAQ ─── -->
+  <!-- FAQ -->
   <section id="faq" class="section">
     <div class="container">
-      <h2>常見問題 · FAQ</h2>
-      <div class="faq-item">
-        <h3>MediaGrab 是免費的嗎？</h3>
-        <p>是的，完全免費。所有功能都解鎖，沒有付費版。我們透過選用性的廣告與 Ko-fi 贊助來支應開發成本，你也可以在設定裡關閉廣告。</p>
+      <div class="section-head reveal">
+        <p class="eyebrow"><span class="mono">常見問題 · FAQ</span></p>
+        <h2>你可能想問</h2>
       </div>
-      <div class="faq-item">
-        <h3>安裝時出現安全警告怎麼辦？</h3>
-        <p>因為程式未經 Apple/Microsoft 付費簽章，系統會顯示警告。Mac 請到「系統設定 → 隱私權與安全性 → 仍要打開」；Windows 請點「其他資訊 → 仍要執行」。詳見各平台安裝說明。</p>
-      </div>
-      <div class="faq-item">
-        <h3>支援哪些網站？</h3>
-        <p>支援數千個網站，包含 YouTube、Facebook、Instagram、抖音/TikTok、Twitter、Bilibili、Twitch 等。底層使用開源的 yt-dlp 引擎。</p>
-      </div>
-      <div class="faq-item">
-        <h3>下載的內容合法嗎？</h3>
-        <p>MediaGrab 是個人備份工具。請僅用於下載你擁有版權的內容、Creative Commons 授權內容、或你有權保存的公開內容。使用者需自行遵守來源網站的服務條款與當地著作權法。</p>
-      </div>
-      <div class="faq-item">
-        <h3>會收集我的資料嗎？</h3>
-        <p>MediaGrab 本身不收集、不上傳你的下載紀錄或任何個人資料。本下載頁面載入第三方廣告時可能放置 cookie，詳見<a href="/privacy.html">隱私政策</a>。</p>
+      <div class="faq reveal">
+        <div class="faq-item">
+          <h3>MediaGrab 是免費的嗎？</h3>
+          <p>是的，完全免費，所有功能都解鎖，沒有付費版。我們透過選用性的廣告與 Ko-fi 贊助支應開發成本，你也可以在設定裡關閉廣告。</p>
+        </div>
+        <div class="faq-item">
+          <h3>安裝時出現安全警告怎麼辦？</h3>
+          <p>因為程式未經 Apple/Microsoft 付費簽章，系統會顯示警告。Mac 請到「系統設定 → 隱私權與安全性 → 仍要打開」；Windows 請點「其他資訊 → 仍要執行」。詳見上方安裝說明。</p>
+        </div>
+        <div class="faq-item">
+          <h3>支援哪些網站？</h3>
+          <p>支援數千個網站，包含 YouTube、Facebook、Instagram、抖音/TikTok、Twitter、Bilibili、Twitch 等。底層使用開源的 yt-dlp 引擎。</p>
+        </div>
+        <div class="faq-item">
+          <h3>下載的內容合法嗎？</h3>
+          <p>MediaGrab 是個人備份工具。請僅用於下載你擁有版權、Creative Commons 授權、或你有權保存的公開內容。使用者需自行遵守來源網站服務條款與當地著作權法。</p>
+        </div>
+        <div class="faq-item">
+          <h3>會收集我的資料嗎？</h3>
+          <p>MediaGrab 本身不收集、不上傳你的下載紀錄或任何個人資料。本下載頁面載入第三方廣告時可能放置 cookie，詳見<a href="/privacy.html">隱私政策</a>。</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ AD ZONE #4 — 728x90 leaderboard (after FAQ, before footer) ═══ -->
-  <div class="ad-zone-wrap">
-    <div class="ad-label">廣告 · Advertisement</div>
-    <iframe src="/ads/lb728.html" width="728" height="90" scrolling="no" frameborder="0"
-            style="border:0;overflow:hidden;max-width:100%" title="ad" loading="lazy"></iframe>
+  <!-- 合併廣告位 #2 -->
+  <div class="container">
+    <div class="ad-slot">
+      <span class="ad-label">廣告 · Advertisement</span>
+      <iframe src="/ads/native.html" width="100%" height="280" scrolling="no" loading="lazy" title="advertisement" style="max-width:728px"></iframe>
+    </div>
   </div>
 
-  <!-- ─── Footer ─── -->
-  <footer class="site-footer">
-    <div class="container">
-      <p class="disclaimer">
-        MediaGrab 是個人影音備份工具。使用者需自行遵守來源網站服務條款與適用著作權法。
-        <br/>
-        MediaGrab is a personal video backup tool. Users are responsible for complying with source-site terms of service and applicable copyright law.
-      </p>
-      <p class="footer-links">
-        <a href="/privacy.html">隱私政策 Privacy</a> ·
-        <a href="https://github.com/cenxialiu7-cloud/MediaGrab" rel="noopener">GitHub</a> ·
-        <a href="https://ko-fi.com/yoyoisgood" target="_blank" rel="noopener">☕ Support on Ko-fi</a>
-      </p>
-      <p class="copyright">© 2026 MediaGrab. Free &amp; open.</p>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="/MediaGrab/" class="brand" style="font-size:var(--text-base)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v10m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          <span>MediaGrab</span>
+        </a>
+        <p class="disclaimer">個人影音備份工具。使用者需自行遵守來源網站服務條款與適用著作權法。</p>
+      </div>
+      <div style="display:flex;gap:var(--space-8);flex-wrap:wrap">
+        <a href="/">全部工具</a>
+        <a href="/privacy.html">隱私政策</a>
+        <a href="https://github.com/cenxialiu7-cloud/MediaGrab" rel="noopener">GitHub</a>
+        <a href="https://ko-fi.com/yoyoisgood" target="_blank" rel="noopener">Ko-fi 贊助</a>
+      </div>
     </div>
+    <div class="container" style="margin-top:var(--space-8)"><p class="muted" style="font-size:var(--text-sm)">© 2026 MediaGrab · Free &amp; open.</p></div>
   </footer>
 
   <script src="app.js"></script>
-  <!-- build: ads v2 -->
+  <script>
+    /* OS 偵測：凸顯使用者系統對應的主下載鍵 */
+    (function () {
+      var ua = navigator.userAgent || '', p = navigator.platform || '';
+      var isWin = /Win/i.test(p) || /Windows/i.test(ua);
+      var isMac = /Mac/i.test(p) || /Mac OS X/i.test(ua);
+      var id = isWin ? 'dl-win' : (isMac ? 'dl-mac-arm' : null);
+      if (id) { var el = document.getElementById(id); if (el) el.classList.add('is-primary'); }
+    })();
+  </script>
 
 </body>
 </html>
-<!-- repath 1779348364 -->

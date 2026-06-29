@@ -142,3 +142,72 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: var(--fw-heading); l
 .ad-slot { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); padding-block: var(--space-12); }
 .ad-slot .ad-label { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); }
 .ad-slot iframe { border: 0; max-width: 100%; overflow: hidden; border-radius: var(--radius-sm); }
+
+/* ============================================================
+   產品頁元件（MediaGrab / MediaStudio 共用）
+   ============================================================ */
+/* 下載按鈕 */
+.dl-row { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-8); }
+.dl { display: flex; flex-direction: column; gap: 3px; padding: .8rem 1.3rem; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--surface-1); min-width: 210px; color: var(--text-primary);
+  transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.dl:hover { border-color: var(--accent); transform: translateY(-1px); }
+.dl .dl-os { font-weight: var(--fw-medium); display: flex; align-items: center; gap: .5rem; }
+.dl .dl-os svg { width: 18px; height: 18px; }
+.dl .dl-sub { font-size: var(--text-xs); color: var(--text-muted); }
+.dl.is-primary { background: var(--accent); color: var(--on-accent); border-color: transparent; }
+.dl.is-primary .dl-sub { color: color-mix(in oklch, var(--on-accent) 65%, transparent); }
+.dl.is-primary::after { content: "建議"; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em;
+  position: absolute; }
+.version-note { margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-muted); font-family: var(--font-mono); }
+.version-note a { color: var(--accent-text); }
+
+/* 安裝指引 */
+.guides { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); margin-top: var(--space-12); }
+.guide { background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-6); }
+.guide h3 { font-size: var(--text-lg); margin-bottom: var(--space-4); display: flex; align-items: center; gap: .5rem; }
+.guide h3 svg { width: 20px; height: 20px; color: var(--accent); }
+.guide ol { padding-left: 1.3rem; display: flex; flex-direction: column; gap: .6rem; color: var(--text-secondary); font-size: var(--text-sm); }
+.guide code { font-family: var(--font-mono); background: var(--surface-2); padding: .1rem .4rem; border-radius: 4px; font-size: .85em; color: var(--text-primary); }
+.guide .tip { margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-muted); border-left: 2px solid var(--accent); padding-left: .8rem; }
+
+/* 功能網格 */
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter); }
+.feature { background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-6);
+  transition: border-color var(--dur-base) var(--ease-out); }
+.feature:hover { border-color: color-mix(in oklch, var(--accent) 50%, var(--border)); }
+.feature .ic { width: 26px; height: 26px; color: var(--accent); margin-bottom: var(--space-4); }
+.feature h3 { font-size: var(--text-lg); margin-bottom: var(--space-2); }
+.feature p { font-size: var(--text-sm); color: var(--text-secondary); }
+
+/* 步驟 */
+.steps { counter-reset: s; display: flex; flex-direction: column; gap: var(--space-4); max-width: 64ch; padding: 0; }
+.steps li { list-style: none; counter-increment: s; position: relative; padding-left: 2.6rem; color: var(--text-secondary); min-height: 1.8rem; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: -2px; width: 1.8rem; height: 1.8rem; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent-text); display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: var(--text-sm); border: 1px solid color-mix(in oklch, var(--accent) 30%, transparent); }
+.steps strong { color: var(--text-primary); font-weight: var(--fw-medium); }
+
+/* FAQ */
+.faq { display: flex; flex-direction: column; gap: var(--space-3); max-width: 72ch; }
+.faq-item { border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-6); background: var(--surface-1); }
+.faq-item h3 { font-size: var(--text-base); margin-bottom: var(--space-2); }
+.faq-item p { font-size: var(--text-sm); color: var(--text-secondary); }
+.faq-item a { color: var(--accent-text); }
+
+/* Ko-fi 浮動鈕（重新設計，融入系統）*/
+.kofi-float { position: fixed; bottom: 20px; right: 20px; z-index: 40; display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--surface-2); color: var(--text-primary); padding: .6rem 1rem; border-radius: 999px; font-size: var(--text-sm);
+  font-weight: var(--fw-medium); border: 1px solid var(--border); backdrop-filter: blur(10px);
+  transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.kofi-float:hover { border-color: var(--accent); transform: translateY(-2px); }
+.kofi-float svg { width: 17px; height: 17px; color: #FF5E5B; }
+
+.section-alt { background: var(--surface-1); border-block: 1px solid var(--border-soft); }
+
+@media (max-width: 860px) { .features { grid-template-columns: repeat(2, 1fr); } .guides { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .features { grid-template-columns: 1fr; } }
+
+/* fix: 主下載鍵「建議」徽章定位 */
+.dl { position: relative; }
+.dl.is-primary::after { top: 8px; right: 12px; opacity: .65; color: var(--on-accent); }
