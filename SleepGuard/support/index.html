@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support · 支援與常見問題 — SleepGuard</title>
+  <meta name="description" content="SleepGuard support — FAQ, troubleshooting, and contact for the bedtime reminder app. 睡眠守護者支援頁：常見問題、疑難排解與聯絡方式。" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Support — SleepGuard" />
+  <meta property="og:description" content="FAQ and troubleshooting for SleepGuard, the private bedtime reminder app." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cenxialiu7-cloud.github.io/SleepGuard/support/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/tokens.css" />
+  <link rel="stylesheet" href="/assets/base.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b388ff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z'/%3E%3C/svg%3E" />
+
+  <style>
+    /* SleepGuard 品牌色（薰衣草紫，對應 App 內配色 #B388FF）——與 /SleepGuard/privacy/ 共用同一覆寫 */
+    :root {
+      --accent: #b388ff;
+      --accent-soft: color-mix(in oklch, var(--accent) 16%, transparent);
+      --accent-text: #cbb2ff;
+      --on-accent: #0c0c0e;
+      --accent-grad-a: #b388ff;
+      --accent-grad-b: #7c4dff;
+    }
+    .wrap { max-width: 72ch; }
+    .wrap h2 { font-size: var(--text-2xl); margin-top: var(--space-16); margin-bottom: var(--space-4); }
+    .wrap h2:first-of-type { margin-top: var(--space-8); }
+    .wrap p { color: var(--text-secondary); margin-bottom: var(--space-4); }
+    .wrap ul, .wrap ol { color: var(--text-secondary); margin: 0 0 var(--space-6) var(--space-6); }
+    .wrap li { margin-bottom: var(--space-2); }
+    .wrap strong { color: var(--text-primary); font-weight: var(--fw-medium); }
+    .zh { color: var(--text-muted); }
+
+    /* Contact cards */
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-4); margin: var(--space-8) 0 var(--space-12);
+    }
+    .contact-card {
+      background: var(--surface-1); border: 1px solid var(--border-soft);
+      border-radius: 12px; padding: var(--space-5);
+      display: flex; flex-direction: column; gap: var(--space-2);
+    }
+    .contact-card .icon { font-size: 1.5rem; }
+    .contact-card a { color: var(--accent-text); text-decoration: underline; font-weight: var(--fw-medium); }
+    .contact-card .desc { color: var(--text-muted); font-size: var(--text-sm); }
+
+    /* FAQ accordion (native <details>, zero JS) */
+    .faq-item {
+      background: var(--surface-1); border: 1px solid var(--border-soft);
+      border-radius: 12px; margin-bottom: var(--space-3); overflow: hidden;
+    }
+    .faq-item summary {
+      cursor: pointer; padding: var(--space-4) var(--space-5);
+      font-weight: var(--fw-medium); color: var(--text-primary);
+      list-style: none; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+'; font-family: var(--font-mono); color: var(--accent-text);
+      font-size: 1.25rem; flex-shrink: 0; transition: transform .2s ease;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item .faq-body { padding: 0 var(--space-5) var(--space-5); }
+    .faq-item .faq-body p { margin-bottom: var(--space-3); }
+    .faq-item .faq-body p:last-child { margin-bottom: 0; }
+
+    .section-label {
+      font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: .1em;
+      text-transform: uppercase; color: var(--accent-text); margin-bottom: var(--space-3); display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="https://cenxialiu7-cloud.github.io/" class="brand">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>
+        <span>SleepGuard</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/SleepGuard/privacy/">Privacy 隱私政策</a>
+        <a href="https://cenxialiu7-cloud.github.io/">← All Tools 全部工具</a>
+        <a href="https://github.com/cenxialiu7-cloud" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── Header ── -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="container wrap">
+      <span class="eyebrow">SleepGuard</span>
+      <h1 class="display" style="font-size:clamp(1.8rem,5vw,var(--text-4xl));margin-top:var(--space-3);">
+        Support · 支援與常見問題
+      </h1>
+      <p class="lead" style="margin-top:var(--space-4);">
+        Stuck on something, or found a bug? Here's how to reach us, plus answers to the questions
+        we hear most.
+        <br/><span class="zh">遇到問題或想回報 bug？這裡有聯絡方式，以及最常見問題的解答。</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section class="section" style="padding-top:var(--space-8);padding-bottom:0;">
+    <div class="container wrap">
+      <span class="section-label">Contact · 聯絡我們</span>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="icon">✉️</div>
+          <a href="mailto:285588179+cenxialiu7-cloud@users.noreply.github.com">Email support</a>
+          <span class="desc">Usually the fastest way to reach us.<br/><span class="zh">通常是最快的聯絡方式。</span></span>
+        </div>
+        <div class="contact-card">
+          <div class="icon">🐙</div>
+          <a href="https://github.com/cenxialiu7-cloud" rel="noopener" target="_blank">Open a GitHub issue</a>
+          <span class="desc">Best for bug reports with steps to reproduce.<br/><span class="zh">回報 bug 建議附上重現步驟。</span></span>
+        </div>
+      </div>
+      <p class="muted" style="font-size:var(--text-sm);margin-bottom:var(--space-12);">
+        When reporting an issue, please include: your iOS version, iPhone model, and whether you
+        granted Screen Time authorization — it helps us reproduce the issue much faster.
+        <br/><span class="zh">回報問題時請附上：iOS 版本、iPhone 型號，以及是否已授權螢幕使用時間，能幫助我們更快重現問題。</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="section" style="padding-top:0;">
+    <div class="container wrap">
+      <span class="section-label">FAQ · 常見問題</span>
+
+      <details class="faq-item">
+        <summary>Why do reminders stop when I'm still using my phone?</summary>
+        <div class="faq-body">
+          <p>
+            Two things need to be true for reminders to keep coming while you're using your phone
+            with the main app closed: (1) you've authorized <strong>Screen Time</strong> in
+            Settings, and (2) you've selected at least one app in the app picker (the apps you
+            actually tend to scroll — e.g. social media, browser). Without a selection, iOS never
+            tells SleepGuard that you're still awake and using your phone, so no reminder can fire.
+          </p>
+          <p class="zh">
+            要在主 App 沒開的情況下持續收到提醒，需要兩個條件：①在設定授權<strong style="color:var(--text-primary)">螢幕使用時間</strong>
+            ②在 App 選擇器裡至少選一個你真的會滑的 App（例如社群 App、瀏覽器）。沒有選任何 App 的話，iOS 不會告訴睡眠守護者你還醒著在用手機，提醒自然就不會觸發。
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why does the reminder stop the instant I lock my screen — but is that reliable?</summary>
+        <div class="faq-body">
+          <p>
+            That's by design: SleepGuard is built to <strong>not wake you up</strong>. It sends
+            reminders in short batches (a few at a time), and locking your screen cancels anything
+            still pending. On devices with a passcode set, this happens within about 10 seconds.
+            Without a passcode, iOS doesn't reliably notify apps when the screen locks, so a batch
+            may finish playing out (a handful of notifications) before it stops.
+          </p>
+          <p class="zh">
+            這是刻意設計的：睡眠守護者的目標是<strong style="color:var(--text-primary)">不吵醒你</strong>。提醒以小批次發送，鎖屏會取消還沒發出的部分。
+            裝置有設密碼時，約 10 秒內就會停止。<strong style="color:var(--text-primary)">沒設密碼的話</strong>，iOS 不會可靠地通知 App「螢幕鎖了」，
+            所以可能會把當批（幾則）發完才停。
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What's the most reliable way to use SleepGuard?</summary>
+        <div class="faq-body">
+          <p>
+            Open the app (or tap the bedtime notification, or say "Hey Siri, start tonight's
+            guard") once before bed. iOS strictly limits what any app can do fully in the
+            background, so this "arm it once, right before bed" step is what makes reminders and
+            monitoring most reliable that night. We'd rather tell you this plainly than promise
+            background magic iOS won't actually deliver.
+          </p>
+          <p class="zh">
+            睡前開一下 App（或點一下就寢提醒、或說「嘿 Siri，開始今晚守護」）。iOS 嚴格限制 App 在背景能做的事，
+            所以「睡前手動啟動一次」是讓當晚提醒與監測最穩定的做法。我們寧可誠實講清楚，也不想承諾 iOS 做不到的背景魔法。
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>I can't find SleepGuard in Control Center.</summary>
+        <div class="faq-body">
+          <p>
+            Control Center controls require <strong>iOS 18.0 or later</strong>. If your iPhone is
+            on iOS 17, this option won't appear — everything else (Siri, Shortcuts, the widget,
+            notifications) still works normally.
+          </p>
+          <p class="zh">
+            控制中心控制項需要 <strong style="color:var(--text-primary)">iOS 18.0（含）以上</strong>。若你的 iPhone 是 iOS 17，這個選項不會出現——
+            其餘功能（Siri、捷徑、小工具、通知）都正常運作，不受影響。
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Screen Time authorization fails, or the guard won't arm.</summary>
+        <div class="faq-body">
+          <p>
+            The most common cause: your sleep window is shorter than <strong>15 minutes</strong>.
+            This is an iOS platform requirement for scheduling this kind of monitoring — the app
+            will show a message explaining this if your window is too short. Make sure Bedtime and
+            Wake Time are set at least 15 minutes apart, then try starting the guard again.
+          </p>
+          <p class="zh">
+            最常見原因：你的睡眠時段短於<strong style="color:var(--text-primary)">15 分鐘</strong>。這是 iOS 排程這類監測的平台限制——
+            時段太短時 App 會顯示說明訊息。請確認入睡與起床時間至少間隔 15 分鐘，再重新啟動守護。
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>The lock screen countdown (Live Activity) isn't showing up.</summary>
+        <div class="faq-body">
+          <p>
+            Two checks: first, enable it in <strong>Settings → Lock Screen Countdown</strong> (it's
+            off by default so it never appears unwanted). Second, Live Activities can only be
+            started while the app is in the foreground — so it needs you to open the app (or use
+            one of the one-tap entry points) once at the start of your sleep window.
+          </p>
+          <p class="zh">
+            兩個檢查點：第一，先在<strong style="color:var(--text-primary)">設定 → 鎖屏倒數</strong>開啟它（預設關閉，不會不請自來）。
+            第二，Live Activity 只能在 App 前景時啟動，所以需要你在睡眠時段開始時開一下 App（或用一鍵入口）。
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>How do I switch the app's language?</summary>
+        <div class="faq-body">
+          <p>
+            Go to <strong>Settings → Language</strong> and choose "Follow System", "English", or
+            "繁體中文". The change applies immediately — no restart needed — and also updates the
+            language used by notifications, the widget, and Siri responses.
+          </p>
+          <p class="zh">
+            到<strong style="color:var(--text-primary)">設定 → 語言</strong>選擇「跟隨系統」、「English」或「繁體中文」。
+            立即生效，不需重啟 App，通知、小工具與 Siri 回覆的語言也會一併更新。
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>How do I delete all my data?</summary>
+        <div class="faq-body">
+          <p>
+            Delete the app. SleepGuard has no server and no account, so everything — your
+            schedule, sleep records, custom messages, and photo — lives only on your device.
+            Uninstalling removes it all immediately; there's nothing left for us to delete on your
+            behalf. See our <a href="/SleepGuard/privacy/" style="color:var(--accent-text);text-decoration:underline;">Privacy Policy</a> for details.
+          </p>
+          <p class="zh">
+            刪除 App 即可。睡眠守護者沒有伺服器也不需要帳號，所有資料——時段設定、睡眠紀錄、自訂訊息、照片——都只存在你的裝置上。
+            解除安裝會立刻清空全部資料，沒有任何伺服器端資料需要我們代為刪除。詳見<a href="/SleepGuard/privacy/" style="color:var(--accent-text);text-decoration:underline;">隱私政策</a>。
+          </p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Notifications aren't arriving at all.</summary>
+        <div class="faq-body">
+          <p>
+            Check <strong>Settings app → Notifications → SleepGuard</strong> and confirm
+            notifications are allowed. Also confirm the guard is actually started (the big button
+            on the Home tab) and that the current time falls within your configured sleep window.
+          </p>
+          <p class="zh">
+            check <strong style="color:var(--text-primary)">系統「設定」App → 通知 → 睡眠守護者</strong>，確認通知權限已開啟。
+            也請確認守護已啟動（首頁大按鈕），以及現在時間確實落在你設定的睡眠時段內。
+          </p>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="https://cenxialiu7-cloud.github.io/" class="brand" style="font-size:var(--text-base)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>
+          <span>SleepGuard</span>
+        </a>
+        <p class="disclaimer">SleepGuard is a free app with no account, no ads, and no data collection.<br/>睡眠守護者是免費 App，不需帳號、無廣告、不蒐集資料。</p>
+      </div>
+      <div style="display:flex;gap:var(--space-8)">
+        <a href="/SleepGuard/privacy/">Privacy 隱私政策</a>
+        <a href="https://cenxialiu7-cloud.github.io/">All Tools 全部工具</a>
+        <a href="https://github.com/cenxialiu7-cloud" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="container" style="margin-top:var(--space-8)"><p class="muted" style="font-size:var(--text-sm)">© 2026 · Free &amp; open.</p></div>
+  </footer>
+
+</body>
+</html>
